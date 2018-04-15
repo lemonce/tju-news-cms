@@ -1,0 +1,22 @@
+{
+  "name": "tju-news-cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lemonce/tju-news-cms.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lemonce/tju-news-cms/issues"
+  },
+  "homepage": "https://github.com/lemonce/tju-news-cms#readme",
+  "dependencies": {
+    "lemonitor-application": "^0.1.1"
+  }
+}
