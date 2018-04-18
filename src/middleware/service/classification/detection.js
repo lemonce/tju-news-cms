@@ -2,12 +2,14 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* getCatagory(req, res, next) {
+module.exports = function* beforeCreateClassification(req, res, next) {
+	const article = res.data();
 	const Catagory = res.sequelize.model('tjuCatagory');
 
 	const catagory = yield Catagory.findOne({
 		where: {
-			id: req.params.catagoryId
+			id: req.params.catagoryId,
+			usability: 1
 		}
 	});
 
@@ -15,7 +17,13 @@ module.exports = function* getCatagory(req, res, next) {
 		throwError('The catagory is not existed.', 404);
 	}
 
-	res.data(catagory);
+	if (article.published) {
+		throwError('The article is published.', 403);
+	}
+
+	res.data({
+		article, catagory
+	});
 
 	next();
 };

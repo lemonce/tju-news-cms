@@ -1,5 +1,22 @@
 'use strict';
 
-module.exports = function* getAriclePublished(req, res, next) {
+const {throwError} = require('error-standardize');
 
+module.exports = function* getArticlePublished(req, res, next) {
+	const Article = res.sequelize.model('tjuArticle');
+
+	const article = yield Article.findOne({
+		where: {
+			published: 1,
+			id: req.params.articleId
+		}
+	});
+
+	if (!article) {
+		throwError('The article is not existed', 404);
+	}
+
+	res.data(article);
+
+	next();
 };

@@ -5,30 +5,36 @@ const {
 } = require('express-handler-loader')('all');
 
 const {
-	getAricleListPublished,
-	getAriclePublished,
+	getArticleListPublished,
+	getArticlePublished,
 	getArticleContent,
-	getAricleListOfCatagory,
+	getArticleListOfCatagory,
 	getCatagoryListUsable,
-	getCatagoryUsable
+	// getCatagoryUsable,
+	getCatagory
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
 
 router.get('/article', $testQuery({
 	properties: {
+		keyword: {
+			type: 'string'
+		}
+	},
+	additionalProperties: false
+}), getArticleListPublished);
 
-	}
-}), getAricleListPublished);
+router.get('/article/:articleId', getArticlePublished);
 
-router.get('/article/:articleId', getAriclePublished);
-
-router.get('/article/:articleId/content', getAriclePublished, getArticleContent);
+router.get('/article/:articleId/content', getArticlePublished, getArticleContent);
 
 router.get('/catagory', $testQuery({
 	properties: {
-
+		name: {
+			type: 'string'
+		}
 	}
 }), getCatagoryListUsable);
 
-router.get('/catagory/:catagoryId/article', getCatagoryUsable, getAricleListOfCatagory);
+router.get('/catagory/:catagoryId/article', getCatagory, getArticleListOfCatagory);
