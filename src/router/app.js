@@ -10,7 +10,6 @@ const {
 	getArticleContent,
 	getArticleListOfCatagory,
 	getCatagoryListUsable,
-	// getCatagoryUsable,
 	getCatagory
 } = require('express-handler-loader')('tju');
 
