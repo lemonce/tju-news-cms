@@ -5,15 +5,17 @@ const Sequelize = require('sequelize');
 
 module.exports = function* getCatagoryListUsable(req, res, next) {
 	const Catagory = res.sequelize.model('tjuCatagory');
-
-	const catagoryList = yield Catagory.findAll({
+	const { name } = req.query;
+	
+	const query = {
 		where: {
-			name: {
-				[Sequelize.Op.like] : `%${req.query.name}%`
-			},
-			usability: 1
+			active: true
 		}
-	});
+	};
+
+	name ? query.where.name = { [Sequelize.Op.like]: `%${name}%`} : undefined;
+
+	const catagoryList = yield Catagory.findAll(query);
 
 	if (catagoryList.length === 0) {
 		throwError('The catagory is not existed', 404);

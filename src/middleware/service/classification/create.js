@@ -10,7 +10,7 @@ module.exports = function* createClassification(req, res, next) {
 	});
 
 	if (classification) {
-		throwError('The classification has existed');
+		throwError('The classification has existed', 403);
 	}
 
 	const newClassification = yield Classification.create(req.params);

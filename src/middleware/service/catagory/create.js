@@ -6,6 +6,7 @@ module.exports = function* createCatagory(req, res, next) {
 	const Catagory = res.sequelize.model('tjuCatagory');
 	const {name} = req.body;
 
+
 	const catagoryExisted = yield Catagory.findAll({
 		where: {
 			name

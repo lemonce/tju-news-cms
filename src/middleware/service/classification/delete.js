@@ -10,10 +10,12 @@ module.exports = function* deleteClassification(req, res, next) {
 	});
 
 	if (!classification) {
-		throwError('The classification is not existed');
+		throwError('The classification is not existed', 404);
 	}
 
 	yield classification.destroy();
+
+	res.data(classification);
 
 	next();
 };

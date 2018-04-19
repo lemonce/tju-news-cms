@@ -15,28 +15,11 @@ const Article = sequelize.define('tjuArticle', {
 	abstract: {
 		type: Sequelize.TEXT
 	},
-	thumb: {
+	thumbnail: {
 		type: Sequelize.STRING
 	},
 	published: {
-		type: Sequelize.TINYINT,
-		set(published) {
-
-			if (published === true) {
-				this.setDataValue('published', 1);
-			} else {
-				this.setDataValue('published', 0);
-			}
-		},
-		get() {
-			const published = this.getDataValue('published');
-
-			if (published === 1) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		type: Sequelize.BOOLEAN
 	}
 }, {
 	paranoid: true
@@ -49,26 +32,8 @@ const Catagory = sequelize.define('tjuCatagory', {
 	description: {
 		type: Sequelize.TEXT
 	},
-	usability: {
-		type: Sequelize.TINYINT,
-		set(usability) {
-
-			if (usability === true) {
-				this.setDataValue('usability', 1);
-			} else {
-				this.setDataValue('usability', 0);
-			}
-		},
-		get() {
-			const usability = this.getDataValue('usability');
-
-			if (usability === 1) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
+	active: {
+		type: Sequelize.BOOLEAN
 	}
 });
 

@@ -9,7 +9,7 @@ module.exports = function* beforeCreateClassification(req, res, next) {
 	const catagory = yield Catagory.findOne({
 		where: {
 			id: req.params.catagoryId,
-			usability: 1
+			active: true
 		}
 	});
 
@@ -20,10 +20,6 @@ module.exports = function* beforeCreateClassification(req, res, next) {
 	if (article.published) {
 		throwError('The article is published.', 403);
 	}
-
-	res.data({
-		article, catagory
-	});
-
+	
 	next();
 };

@@ -12,11 +12,12 @@ module.exports = function* getArticleList(req, res, next) {
 	const query = {
 		where: {
 			author
-		}
+		},
+		order: [['created_at', 'desc']]
 	};
 
 	keyword ? (query.where.title = {[Sequelize.Op.like]: `%${keyword}%`}) : undefined;
-	published ? (query.where.published = (published === 'true' ? 1 : 0)) : undefined;
+	published ? (query.where.published = (published === 'true' ? true : false)) : undefined;
 
 	const articleList = yield Article.findAll(query);
 

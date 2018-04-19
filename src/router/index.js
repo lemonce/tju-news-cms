@@ -11,6 +11,4 @@ const serviceRouter = require('./service');
 
 router.use('/app', appRouter);
 
-router.use('/service', serviceRouter);
-
-router.use('/service', isAccountSignedIn);
+router.use('/service', isAccountSignedIn, serviceRouter);

@@ -13,6 +13,9 @@ module.exports = function* getArticleListOfCatagory(req, res, next) {
 		},
 		include: [{
 			model: Article,
+			where: {
+				published: true
+			}
 		}]
 	});
 

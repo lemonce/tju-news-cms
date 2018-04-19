@@ -4,6 +4,7 @@ const path = require('path');
 const { appendEntry } = require('lemonitor-application');
 
 require('./src/model');
+
 require('express-handler-loader')('tju', {
 	pathname: path.resolve(__dirname, './src/middleware')
 });

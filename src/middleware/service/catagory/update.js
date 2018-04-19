@@ -5,7 +5,7 @@ const {throwError} = require('error-standardize');
 module.exports = function* updateCatagory(req, res, next) {
 	const catagory = res.data();
 
-	if (catagory.usability) {
+	if (!catagory.active) {
 		throwError('The catagroy has disabled.', 403);
 	}
 

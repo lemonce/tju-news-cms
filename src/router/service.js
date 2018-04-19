@@ -11,6 +11,7 @@ const {
 	getAdmin,
 	createArticle,
 	getArticleList,
+	getArticleForAuthor,
 	getArticle,
 	updateArticle,
 	deleteArticle,
@@ -47,16 +48,15 @@ router.post('/article', $testBody({
 		abstract: {
 			type: 'string'
 		},
-		thumb: {
+		thumbnail: {
 			type: 'string'
 		},
 		published: {
-			type: 'string',
-			pattern: '^(true|false)$'
+			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
-	required: ['title', 'content', 'abstract', 'thumb', 'published']
+	required: ['title', 'content', 'abstract', 'thumbnail', 'published']
 }), createArticle);
 
 router.get('/article', $testQuery({
@@ -71,7 +71,7 @@ router.get('/article', $testQuery({
 	}
 }), getArticleList);
 
-router.get('/article/:articleId', getArticle);//详细信息包括分类
+router.get('/article/:articleId', getArticle, getArticleForAuthor);//详细信息包括分类
 
 router.put('/article/:articleId', $testBody({
 	properties: {
@@ -84,12 +84,11 @@ router.put('/article/:articleId', $testBody({
 		abstract: {
 			type: 'string'
 		},
-		thumb: {
+		thumbnail: {
 			type: 'string'
 		},
 		published: {
-			type: 'string',
-			pattern: '^(true|false)$'
+			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
@@ -106,13 +105,12 @@ router.post('/catagory', $testBody({
 		description: {
 			type: 'string'
 		},
-		usability: {
-			type: 'string',
-			pattern: '^(true|false)$'
+		active: {
+			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
-	required: ['name', 'description', 'usability']
+	required: ['name', 'description', 'active']
 }), createCatagory);
 
 router.get('/catagory', $testQuery({
@@ -120,7 +118,7 @@ router.get('/catagory', $testQuery({
 		name: {
 			type: 'string'
 		},
-		usability: {
+		active: {
 			type: 'string',
 			pattern: '^(true|false)$'
 		}	
@@ -132,13 +130,12 @@ router.get('/catagory/:catagoryId', getCatagory);
 
 router.put('/catagory/:catagoryId', $testBody({ //只能由可用改为不可用
 	properties: {
-		usability: {
-			type: 'string',
-			pattern: '^(true|false)$'
+		active: {
+			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
-	required: ['usability']
+	required: ['active']
 }), getCatagory, updateCatagory);
 
 router.post('/article/:articleId/catagory/:catagoryId', getArticle, beforeCreateClassification, createClassification);

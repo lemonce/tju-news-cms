@@ -2,18 +2,19 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* getArticlePublished(req, res, next) {
+module.exports = function* getArticle(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
-
+	const author = req.session.accountId;
+	
 	const article = yield Article.findOne({
 		where: {
-			published: true,
-			id: req.params.articleId
+			id: req.params.articleId,
+			author
 		}
 	});
 
 	if (!article) {
-		throwError('The article is not existed', 404);
+		throwError('The article is not existed.', 404);
 	}
 
 	res.data(article);

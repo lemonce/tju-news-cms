@@ -21,11 +21,11 @@ Catagory.hasMany(Classification, {
 	foreignKey: 'catagoryId'
 });
 
-Classification.hasMany(Article, {
+Classification.belongsTo(Article, {
 	foreignKey: 'articleId'
 });
 
-Classification.hasMany(Catagory, {
+Classification.belongsTo(Catagory, {
 	foreignKey: 'catagoryId'
 });
 

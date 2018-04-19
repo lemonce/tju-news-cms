@@ -10,8 +10,9 @@ module.exports = function* getArticleListPublished(req, res, next) {
 
 	const query = {
 		where: {
-			published: 1
-		}
+			published: true
+		},
+		order: [['created_at', 'desc']]
 	};
 
 	keyword ? (query.where.title = {[Sequelize.Op.like]: `%${keyword}%`}) : undefined;

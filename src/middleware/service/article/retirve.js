@@ -1,20 +1,9 @@
 'use strict';
 
-const {throwError} = require('error-standardize');
-
-module.exports = function* getArticle(req, res, next) {
-	const Article = res.sequelize.model('tjuArticle');
+module.exports = function* getArticleForAuthor(req, res, next) {
+	const article = res.data();
+	const _ = require('lodash');
 	const Classification = res.sequelize.model('tjuClassification');
-	
-	const article = yield Article.findOne({
-		where: {
-			id: req.params.articleId
-		}
-	});
-
-	if (!article) {
-		throwError('The article is not existed.', 404);
-	}
 
 	const classificationList = yield Classification.findAll({
 		where: {
@@ -22,9 +11,17 @@ module.exports = function* getArticle(req, res, next) {
 		}
 	});
 
-	article.catagoryList = classificationList;
+	const mixedArticle = _.pick(article, [
+		'id', 'title', 'content', 'abstract', 'thumbnail', 'author'
+	]);
 
-	res.data(article);
+	mixedArticle.classification = [];
+
+	classificationList.forEach(element => {
+		mixedArticle.classification.push(element.catagoryId);
+	});
+
+	res.data(mixedArticle);
 
 	next();
 };
