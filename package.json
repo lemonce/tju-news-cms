@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/lemonce/tju-news-cms#readme",
   "dependencies": {
-    "lemonitor-application": "^0.1.1"
+    "lemonitor-application": "git+https://github.com/lemonce/lemonitor-application.git#element-ui",
+    "vue-data-tables": "^3.2.0"
   }
 }

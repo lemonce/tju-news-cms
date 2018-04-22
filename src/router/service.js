@@ -14,6 +14,7 @@ const {
 	getArticleForAuthor,
 	getArticle,
 	updateArticle,
+	getArticleContentByService,
 	deleteArticle,
 	createCatagory,
 	getCatagoryList,
@@ -94,6 +95,8 @@ router.put('/article/:articleId', $testBody({
 	additionalProperties: false,
 	required: ['published']
 }), getArticle, updateArticle);
+
+router.get('/article/:articleId/content', getArticle, getArticleContentByService);
 
 router.delete('/article/:articleId', getArticle, deleteArticle);
 

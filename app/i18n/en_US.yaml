@@ -1,0 +1,15 @@
+tju:
+  article: 'Article'
+  administrator: 'Administrator'
+  catagory: 'Catagory'
+
+administrator:
+  all: 'List'
+
+article:
+  all: 'List'
+  publish: 'Publish'
+
+catagory:
+  all: 'List'
+  publish: 'Publish'
