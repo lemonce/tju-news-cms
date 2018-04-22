@@ -145,9 +145,7 @@ export default {
 		editorRow(index) {
 			const id = this.tableData[index].id;
 
-			return axios.get(`/api/tju/service/article/${id}`).then(res => {
-				console.log(res.data.data);
-			});
+			this.$router.push({ path: `/tju/article/${id}`});
 		},
 		articleContent(index) {
 			const id = this.tableData[index].id;

@@ -87,7 +87,7 @@ app.router.addRoutes([
 				component: CreateArticle
 			},
 			{
-				path: 'editor',
+				path: ':id',
 				component: ArticleEditor
 			}
 		]

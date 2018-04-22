@@ -57,7 +57,7 @@ router.post('/article', $testBody({
 		}
 	},
 	additionalProperties: false,
-	required: ['title', 'content', 'abstract', 'thumbnail', 'published']
+	required: ['title', 'content', 'abstract', 'thumbnail']
 }), createArticle);
 
 router.get('/article', $testQuery({

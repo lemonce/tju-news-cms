@@ -47,6 +47,11 @@ export default {
 		return {
 			column: [
 				{
+					prop: 'id',
+					label: 'Number',
+					sortable: true	
+				},
+				{
 					prop: 'name',
 					label: 'Name',
 					sortable: false
