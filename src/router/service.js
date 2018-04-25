@@ -94,15 +94,12 @@ router.post('/catagory', $testBody({
 		name: {
 			type: 'string'
 		},
-		description: {
-			type: 'string'
-		},
 		active: {
 			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
-	required: ['name', 'description', 'active']
+	required: ['name']
 }), createCatagory);
 
 router.get('/catagory', $testQuery({
@@ -131,5 +128,7 @@ router.put('/catagory/:catagoryId', $testBody({ //只能由可用改为不可用
 }), getCatagory, updateCatagory);
 
 router.post('/article/:articleId/catagory/:catagoryId', getArticle, beforeCreateClassification, createClassification);
+
+router.post('/article/:articleId/catagory', getArticle, createClassification);
 
 router.delete('/article/:articleId/catagory/:catagoryId', getArticle, beforeCreateClassification, deleteClassification);

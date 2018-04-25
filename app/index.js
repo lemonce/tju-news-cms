@@ -7,8 +7,8 @@ import app from 'app';
 import Home from 'app/component/Home.vue';
 import AdminstratorList from './component/administrator/list.vue';
 import CreateArticle from './component/article/create.vue';
+import UpdateArticle from './component/article/update.vue';
 import ArticleList from './component/article/list.vue';
-import CreateCatagory from './component/catagory/create.vue';
 import CatagoryList from './component/catagory/list.vue';
 
 import en_US from './i18n/en_US.yaml';
@@ -34,19 +34,23 @@ app.menu.addGroup('tju.article', [
 	{
 		label: 'article.create',
 		path: '/tju/article/publish'
-	}
-]);
-
-app.menu.addGroup('tju.catagory', [
+	},
 	{
 		label: 'catagory.all',
 		path: '/tju/catagory/all'
-	},
-	{
-		label: 'catagory.create',
-		path: '/tju/catagory/publish'
 	}
 ]);
+
+// app.menu.addGroup('tju.catagory', [
+// 	{
+// 		label: 'catagory.all',
+// 		path: '/tju/catagory/all'
+// 	},
+// 	{
+// 		label: 'catagory.create',
+// 		path: '/tju/catagory/publish'
+// 	}
+// ]);
 
 app.router.addRoutes([
 	{
@@ -81,8 +85,8 @@ app.router.addRoutes([
 				component: CreateArticle
 			},
 			{
-				path: ':id/editor',
-				component: CreateArticle
+				path: ':id/update',
+				component: UpdateArticle
 			}
 		]
 	}
@@ -99,10 +103,6 @@ app.router.addRoutes([
 			{
 				path: 'all',
 				component: CatagoryList
-			},
-			{
-				path: 'publish',
-				component: CreateCatagory
 			}
 		]
 	}

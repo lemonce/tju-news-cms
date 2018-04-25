@@ -134,7 +134,7 @@ export default {
 		editorRow(index) {
 			const id = this.tableData[index].id;
 
-			this.$router.push({ path: `/tju/article/${id}/editor`});
+			this.$router.push({ path: `/tju/article/${id}/update`});
 		},
 		articleContent(val) {
 			// this.$router.push({ path: `/tju/article/${val.id}/detail`});

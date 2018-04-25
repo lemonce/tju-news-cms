@@ -45,24 +45,25 @@ export default {
 					prop: 'id',
 					label: 'Id',
 					sortable: true,
-					width: '150'
+					width: '70'
 				},
 				{
 					prop: 'name',
 					label: 'Name',
 					sortable: false,
-					width: '300'
+					width: '100'
 				},
 				{
 					prop: 'email',
 					label: 'Email',
 					sortable: false,
+					width: '300'
 				},
 				{
 					prop: 'created_at',
 					label: 'CreatedAt',
 					sortable: true,
-					width: '400'
+					width: '200'
 				}
 			],
 			tableData: [],

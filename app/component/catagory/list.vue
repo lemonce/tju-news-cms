@@ -2,31 +2,60 @@
 	<el-container>
 		<el-header>
 			<h1>
-				catagory list
+				Category list
 			</h1>
 		</el-header>
 		<el-main>
+			<el-form
+				ref="catagory"
+				:model="catagory"
+				:rules="formRules"
+				label-width="100px"
+				label-position="top"
+				height="40px"
+				@submit.native.prevent="createCatagory('catagory')">
+				<el-form-item prop="name">
+					<el-input placeholder="New Category" v-model="catagory.name">
+						<el-button slot="append" native-type="submit">Create</el-button>
+					</el-input>
+				</el-form-item>
+			</el-form>
 			<data-tables
 				:data="tableData"
 				border
 				:search-def="searchDef"
-				:checkbox-filter-def="checkboxFilterDef"
 				:pagination-def="paginationDef"
-				:actions-def="actionsDef"
+				width="600px"
 				ref="multipleTable"
 				@selection-change="handleSelectionChange">
 				<el-table-column
-					type="selection"
-					width="55"></el-table-column>
-				<el-table-column
-					v-for="(element, index) in column"
-					v-bind:key="index"
-					:prop="element.prop"
-					:label="element.label"
+					prop="id"
+					label="Id"
 					align="center"
-					:sortable="element.sortable"
-					height="20px"
-					:width="element.width">
+					sortable="true"
+					width="100">
+				</el-table-column>
+				<el-table-column
+					prop="name"
+					label="Name"
+					align="center"
+					width="150">
+				</el-table-column>
+				<el-table-column
+					prop="created_at"
+					label="CreateAt"
+					align="center"
+					width="200">
+				</el-table-column>
+				<el-table-column
+					label="active"
+					prop="active"
+					align="center"
+					width="150">
+					<template slot-scope="scope">
+						<el-switch v-model="scope.row.active" @change="updateCategory(scope.row)">
+						</el-switch>
+					</template>
 				</el-table-column>
 			</data-tables>
 		</el-main>
@@ -41,80 +70,31 @@ export default {
 	name: 'catagoryList',
 	data() {
 		return {
-            column: [
-				{
-					prop: 'id',
-					label: 'Id',
-					sortable: true,
-					width: '150'	
-				},
-				{
-					prop: 'name',
-					label: 'Name',
-					sortable: false,
-					width: '200'
-				},
-				{
-					prop: 'description',
-					label: 'Description',
-					sortable: false
-				},
-				{
-					prop: 'active',
-					label: 'Active',
-					sortable: false,
-					width: '150'
-				},
-				{
-					prop: 'created_at',
-					label: 'CreatedAt',
-					sortable: true,
-					width: '300'
-				}
-			],
-            tableData: [],
-            checkboxFilterDef: {
-				props: 'active',
-				def: [{
-				'code': 'true',
-				'name': 'Active'
-				}, {
-				'code': 'false',
-				'name': 'Freeze'
-				}]
+			catagory: {
+				name: '',
+				active: true
 			},
+			formRules: {
+				name: [
+					{
+						required: true,
+						message: 'Please input Catagory name',
+					},
+					{
+						min: 2,
+						message: 'Length is at least 2',
+					}
+				]
+			},
+            tableData: [],
 			searchDef: {
-				show: true,
-				props: 'name'
+				show: false
 			},
 			paginationDef: {
 				pageSize: 10,
 				pageSizes: [5, 10, 20],
             },
 			multipleSelection: [],
-			actionsDef: {
-				def: [{
-					name: 'delete',
-					handler: () => {
-						this.multipleSelection.forEach(row => {
-
-							return axios.put(`/api/tju/service/catagory/${row.id}`, {
-								active: false
-							}).then(res => {
-								this.updateData();
-							}).catch(err => {
-								this.$notify.error({
-									title: 'Fail',
-									message: 'The delete of catagory is failed',
-									duration: 2000,
-									position: 'top-left',
-									offset: 100
-								});
-							});
-						})
-					}
-				}]
-			}
 		}
 	},
 	mounted() {
@@ -131,14 +111,59 @@ export default {
 				data.forEach(element => {
 
 					element.created_at = dateFormat(element.created_at, 'yyyy/mm/dd  HH:MM');
-
-					element.active = element.active ? 'true' : 'false';
 				});
 
 
 				this.tableData = res.data.data;
 			});
-		}
+		},
+		updateCategory(row) {
+			return axios.put(`/api/tju/service/catagory/${row.id}`, {
+					active: row.active
+				}).then(res => {
+					this.updateData();
+				}).catch(err => {
+					this.$notify.error({
+						title: 'Fail',
+						message: 'The change catagory is failed',
+						duration: 2000,
+						position: 'top-left',
+						offset: 100
+					});
+				});
+		},
+		resetForm(formName) {
+        	this.$refs[formName].resetFields();
+		},
+		createCatagory(formName) {
+			this.$refs[formName].validate((valid) => {
+				if (valid) {
+					axios.post('/api/tju/service/catagory', this.catagory).then(res => {
+						this.resetForm(formName);
+						this.updateData();
+						
+						this.$notify({
+							title: 'Success',
+							message: 'You have created a catagory',
+							type: 'success',
+							duration: 2000,
+							position: 'top-left'
+						});
+					}).catch(err => {
+
+						this.$notify.error({
+							title: 'Fail',
+							message: 'The creation process failed',
+							duration: 2000,
+							position: 'top-left',
+							offset: 100
+						});
+					});
+				} else {
+					return false;
+				}
+			});
+		} 
 	}
 }
 </script>

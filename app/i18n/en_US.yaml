@@ -4,12 +4,11 @@ tju:
   catagory: 'Catagory'
 
 administrator:
-  all: 'List'
+  all: 'All Administrator'
 
 article:
-  all: 'List'
-  create: 'Create'
+  all: 'All Article'
+  create: 'new Article'
 
 catagory:
-  all: 'List'
-  create: 'Create'
+  all: 'Catagory'

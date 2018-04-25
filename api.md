@@ -37,7 +37,6 @@ the api of tju
 ```
 {
     name: string,
-    description: string
     active: boolean
 }
 ```

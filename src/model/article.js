@@ -26,11 +26,9 @@ const Catagory = sequelize.define('tjuCatagory', {
 	name: {
 		type: Sequelize.STRING
 	},
-	description: {
-		type: Sequelize.TEXT
-	},
 	active: {
-		type: Sequelize.BOOLEAN
+		type: Sequelize.BOOLEAN,
+		defaultValue: 1
 	}
 });
 
