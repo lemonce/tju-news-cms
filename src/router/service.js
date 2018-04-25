@@ -51,9 +51,6 @@ router.post('/article', $testBody({
 		},
 		thumbnail: {
 			type: 'string'
-		},
-		published: {
-			type: 'boolean'
 		}
 	},
 	additionalProperties: false,
@@ -64,10 +61,6 @@ router.get('/article', $testQuery({
 	properties: {
 		keyword: {
 			type: 'string'
-		},
-		published: {
-			type: 'string',
-			pattern: '^(true|false)$'	
 		}
 	}
 }), getArticleList);
@@ -87,13 +80,9 @@ router.put('/article/:articleId', $testBody({
 		},
 		thumbnail: {
 			type: 'string'
-		},
-		published: {
-			type: 'boolean'
 		}
 	},
-	additionalProperties: false,
-	required: ['published']
+	additionalProperties: false
 }), getArticle, updateArticle);
 
 router.get('/article/:articleId/content', getArticle, getArticleContentByService);

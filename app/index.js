@@ -8,8 +8,6 @@ import Home from 'app/component/Home.vue';
 import AdminstratorList from './component/administrator/list.vue';
 import CreateArticle from './component/article/create.vue';
 import ArticleList from './component/article/list.vue';
-import ArticleDetail from './component/article/detail.vue';
-import ArticleEditor from './component/article/editor.vue';
 import CreateCatagory from './component/catagory/create.vue';
 import CatagoryList from './component/catagory/list.vue';
 
@@ -34,7 +32,7 @@ app.menu.addGroup('tju.article', [
 		path: '/tju/article/all'
 	},
 	{
-		label: 'article.publish',
+		label: 'article.create',
 		path: '/tju/article/publish'
 	}
 ]);
@@ -45,7 +43,7 @@ app.menu.addGroup('tju.catagory', [
 		path: '/tju/catagory/all'
 	},
 	{
-		label: 'catagory.publish',
+		label: 'catagory.create',
 		path: '/tju/catagory/publish'
 	}
 ]);
@@ -79,16 +77,12 @@ app.router.addRoutes([
 				component: ArticleList
 			},
 			{
-				path: 'detail',
-				component: ArticleDetail
-			},
-			{
 				path: 'publish',
 				component: CreateArticle
 			},
 			{
-				path: ':id',
-				component: ArticleEditor
+				path: ':id/editor',
+				component: CreateArticle
 			}
 		]
 	}

@@ -6,12 +6,11 @@
 			</el-header>
 			<el-main>
 				<el-form
-					class="col-md-6"
 					ref="catagory"
 					:model="catagory"
 					:rules="formRules"
 					label-width="100px"
-					label-position="left"
+					label-position="top"
 					size="medium"
 					@submit.native.prevent="createCatagory('catagory')">
 					<el-form-item label="name" prop="name">

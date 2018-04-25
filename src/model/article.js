@@ -17,9 +17,6 @@ const Article = sequelize.define('tjuArticle', {
 	},
 	thumbnail: {
 		type: Sequelize.STRING
-	},
-	published: {
-		type: Sequelize.BOOLEAN
 	}
 }, {
 	paranoid: true

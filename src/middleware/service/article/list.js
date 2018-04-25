@@ -7,7 +7,7 @@ module.exports = function* getArticleList(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
 	const author = req.session.accountId;
 
-	const {keyword, published} = req.query;
+	const {keyword} = req.query;
 
 	const query = {
 		where: {
@@ -17,7 +17,6 @@ module.exports = function* getArticleList(req, res, next) {
 	};
 
 	keyword ? (query.where.title = {[Sequelize.Op.like]: `%${keyword}%`}) : undefined;
-	published ? (query.where.published = (published === 'true' ? true : false)) : undefined;
 
 	const articleList = yield Article.findAll(query);
 

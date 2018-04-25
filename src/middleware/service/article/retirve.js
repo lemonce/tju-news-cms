@@ -5,7 +5,7 @@ module.exports = function* getArticleForAuthor(req, res, next) {
 	const _ = require('lodash');
 	const Classification = res.sequelize.model('tjuClassification');
 
-	const classificationList = yield Classification.findAll({
+	const classification = yield Classification.findOne({
 		where: {
 			articleId: article.id
 		}
@@ -15,11 +15,9 @@ module.exports = function* getArticleForAuthor(req, res, next) {
 		'id', 'title', 'content', 'abstract', 'thumbnail', 'author'
 	]);
 
-	mixedArticle.classification = [];
-
-	classificationList.forEach(element => {
-		mixedArticle.classification.push(element.catagoryId);
-	});
+	if (classification) {
+		mixedArticle.catagory = classification.catagoryId;
+	}
 
 	res.data(mixedArticle);
 

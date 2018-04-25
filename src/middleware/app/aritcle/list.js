@@ -9,9 +9,6 @@ module.exports = function* getArticleListPublished(req, res, next) {
 	const { keyword } = req.query;
 
 	const query = {
-		where: {
-			published: true
-		},
 		order: [['created_at', 'desc']]
 	};
 

@@ -17,11 +17,10 @@ the api of tju
     content: string
     abstract: string
     thumbnail: string
-    published: boolean
 }
 ```
 
-## GET /api/tju/service/article?keyword=string&published=boolean
+## GET /api/tju/service/article?keyword=string
 查找文章列表
 
 ## GET /api/tju/service/article/:articleId

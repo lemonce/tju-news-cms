@@ -8,8 +8,8 @@ administrator:
 
 article:
   all: 'List'
-  publish: 'Publish'
+  create: 'Create'
 
 catagory:
   all: 'List'
-  publish: 'Publish'
+  create: 'Create'

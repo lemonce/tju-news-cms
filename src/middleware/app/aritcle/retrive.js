@@ -7,7 +7,6 @@ module.exports = function* getArticlePublished(req, res, next) {
 
 	const article = yield Article.findOne({
 		where: {
-			published: true,
 			id: req.params.articleId
 		}
 	});

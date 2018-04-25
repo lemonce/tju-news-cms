@@ -16,10 +16,6 @@ module.exports = function* beforeCreateClassification(req, res, next) {
 	if (!catagory) {
 		throwError('The catagory is not existed.', 404);
 	}
-
-	if (article.published) {
-		throwError('The article is published.', 403);
-	}
 	
 	next();
 };
