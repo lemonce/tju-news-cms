@@ -3,8 +3,8 @@
 const {throwError} = require('error-standardize');
 const Sequelize = require('sequelize');
 
-module.exports = function* getCatagoryList(req, res, next) {
-	const Catagory = res.sequelize.model('tjuCatagory');
+module.exports = function* getCategoryList(req, res, next) {
+	const Category = res.sequelize.model('tjuCategory');
 	const { name, active } = req.query;
 	
 	const query = {
@@ -14,13 +14,13 @@ module.exports = function* getCatagoryList(req, res, next) {
 	name ? query.where.name = { [Sequelize.Op.like]: `%${name}%`} : undefined;
 	active ? query.where.active = (active === 'true' ? true : false) : undefined;
 
-	const catagoryList = yield Catagory.findAll(query);
+	const categoryList = yield Category.findAll(query);
 
-	if (catagoryList.length === 0) {
-		throwError('The catagory is not existed', 404);
+	if (categoryList.length === 0) {
+		throwError('The category is not existed', 404);
 	}
 
-	res.data(catagoryList);
+	res.data(categoryList);
 
 	next();
 };

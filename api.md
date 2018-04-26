@@ -32,7 +32,7 @@ the api of tju
 ## DELETE /api/tju/service/article/:articleId
 删除某个文章（未发布的文章）
 
-## POST /api/tju/service/catagory
+## POST /api/tju/service/category
 创建一个分类
 ```
 {
@@ -41,13 +41,13 @@ the api of tju
 }
 ```
 
-## GET /api/tju/service/catagory?name=string&active=boolean
+## GET /api/tju/service/category?name=string&active=boolean
 获取分类列表
 
-## GET /api/tju/service/catagory/:catagoryId
+## GET /api/tju/service/category/:categoryId
 查询某个分类的详细信息
 
-## PUT /api/tju/service/catagory/:catagoryId
+## PUT /api/tju/service/category/:categoryId
 ```
 {
     active: boolean
@@ -55,13 +55,13 @@ the api of tju
 ```
 修改某个分类的使用状态（激活或者冻结）
 
-## POST /api/tju/service/article/:articleId/catagory/:catagoryId
+## POST /api/tju/service/article/:articleId/category/:categoryId
 ```
 {}
 ```
 给文章一个分类
 
-## DELETE /api/tju/service/article/:articleId/catagory/:catagoryId
+## DELETE /api/tju/service/article/:articleId/category/:categoryId
 将某个文章删除分类
 
 # app
@@ -75,9 +75,9 @@ the api of tju
 ## GET /api/tju/app/article/:articleId/content
 获取某个文章的内容
 
-## GET /api/tju/app/catagory
+## GET /api/tju/app/category
 获取分类列表
 
-## GET /api/tju/app/catagory/:catagoryId/article
+## GET /api/tju/app/category/:categoryId/article
 获取某个分类的文章列表
 

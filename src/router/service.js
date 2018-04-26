@@ -16,13 +16,12 @@ const {
 	updateArticle,
 	getArticleContentByService,
 	deleteArticle,
-	createCatagory,
-	getCatagoryList,
-	getCatagory,
-	updateCatagory,
+	createCategory,
+	getCategoryList,
+	getCategory,
+	updateCategory,
 	beforeCreateClassification,
-	createClassification,
-	deleteClassification
+	uploadImage
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
@@ -51,11 +50,17 @@ router.post('/article', $testBody({
 		},
 		thumbnail: {
 			type: 'string'
+		},
+		category: {
+			type: ['number', 'null']
+		},
+		alias: {
+			type: 'string'
 		}
 	},
 	additionalProperties: false,
-	required: ['title', 'content', 'abstract', 'thumbnail']
-}), createArticle);
+	required: ['title', 'content']
+}), beforeCreateClassification, createArticle);
 
 router.get('/article', $testQuery({
 	properties: {
@@ -80,16 +85,19 @@ router.put('/article/:articleId', $testBody({
 		},
 		thumbnail: {
 			type: 'string'
+		},
+		category: {
+			type: ['number', 'null']
 		}
 	},
 	additionalProperties: false
-}), getArticle, updateArticle);
+}), getArticle, beforeCreateClassification, updateArticle);
 
 router.get('/article/:articleId/content', getArticle, getArticleContentByService);
 
 router.delete('/article/:articleId', getArticle, deleteArticle);
 
-router.post('/catagory', $testBody({
+router.post('/category', $testBody({
 	properties: {
 		name: {
 			type: 'string'
@@ -100,9 +108,9 @@ router.post('/catagory', $testBody({
 	},
 	additionalProperties: false,
 	required: ['name']
-}), createCatagory);
+}), createCategory);
 
-router.get('/catagory', $testQuery({
+router.get('/category', $testQuery({
 	properties: {
 		name: {
 			type: 'string'
@@ -113,11 +121,11 @@ router.get('/catagory', $testQuery({
 		}	
 	},
 	additionalProperties: false
-}), getCatagoryList);
+}), getCategoryList);
 
-router.get('/catagory/:catagoryId', getCatagory);
+router.get('/category/:categoryId', getCategory);
 
-router.put('/catagory/:catagoryId', $testBody({ //只能由可用改为不可用
+router.put('/category/:categoryId', $testBody({ //只能由可用改为不可用
 	properties: {
 		active: {
 			type: 'boolean'
@@ -125,10 +133,6 @@ router.put('/catagory/:catagoryId', $testBody({ //只能由可用改为不可用
 	},
 	additionalProperties: false,
 	required: ['active']
-}), getCatagory, updateCatagory);
+}), getCategory, updateCategory);
 
-router.post('/article/:articleId/catagory/:catagoryId', getArticle, beforeCreateClassification, createClassification);
-
-router.post('/article/:articleId/catagory', getArticle, createClassification);
-
-router.delete('/article/:articleId/catagory/:catagoryId', getArticle, beforeCreateClassification, deleteClassification);
+router.post('/image', uploadImage);

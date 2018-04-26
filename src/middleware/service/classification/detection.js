@@ -3,18 +3,20 @@
 const {throwError} = require('error-standardize');
 
 module.exports = function* beforeCreateClassification(req, res, next) {
-	const article = res.data();
-	const Catagory = res.sequelize.model('tjuCatagory');
+	const Category = res.sequelize.model('tjuCategory');
 
-	const catagory = yield Catagory.findOne({
-		where: {
-			id: req.params.catagoryId,
-			active: true
+	if (req.body.category) {
+
+		const category = yield Category.findOne({
+			where: {
+				id: req.body.category,
+				active: true
+			}
+		});
+	
+		if (!category) {
+			throwError('The category is not existed.', 404);
 		}
-	});
-
-	if (!catagory) {
-		throwError('The catagory is not existed.', 404);
 	}
 	
 	next();

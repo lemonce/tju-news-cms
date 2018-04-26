@@ -1,7 +1,7 @@
 tju:
   article: 'Article'
   administrator: 'Administrator'
-  catagory: 'Catagory'
+  category: 'Category'
 
 administrator:
   all: 'All Administrator'
@@ -10,5 +10,5 @@ article:
   all: 'All Article'
   create: 'new Article'
 
-catagory:
-  all: 'Catagory'
+category:
+  all: 'Category'

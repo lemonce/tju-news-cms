@@ -25,11 +25,20 @@ export default {
 				if (valid) {
 
 					const article = _.pick(articleObject,
-						['title', 'content', 'abstract', 'thumbnail']);
+						['title', 'content', 'abstract', 'thumbnail', 'category']);
 
 					axios.post('/api/tju/service/article', article).then(res => {
-						
-						this.createClassification(res.data.data.id, articleObject, form, editor);
+						this.resetForm(form);
+
+						editor.setData('');
+
+						this.$notify({
+							title: 'Success',
+							message: 'You have created a article',
+							type: 'success',
+							duration: 2000,
+							position: 'top-left'
+						});
 					}).catch(err => {
 
 						this.$notify.error({
@@ -54,36 +63,6 @@ export default {
 					return false;
 				}
 			});
-		},
-		createClassification(articleId, articleObject, form, editor) {
-
-			const baseUrl = `/api/tju/service/article/${articleId}/catagory`;
-
-			const url = articleObject.catagory ? `${baseUrl}/${articleObject.catagory}` : baseUrl;
-
-			axios.post(url)
-				.then(() => {
-					this.resetForm(form);
-
-					editor.setData('');
-
-					this.$notify({
-						title: 'Success',
-						message: 'You have created a article',
-						type: 'success',
-						duration: 2000,
-						position: 'top-left'
-					});
-				}).catch(err => {
-					console.log(err);
-					this.$notify.error({
-						title: 'Fail',
-						message: 'The catagory of article creation process failed',
-						duration: 2000,
-						position: 'top-left',
-						offset: 100
-					});
-				});
 		},
 		resetForm(form) {
 			form.resetFields();

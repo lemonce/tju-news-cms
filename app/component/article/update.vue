@@ -34,40 +34,10 @@ export default {
 			form.validate((valid) => {
 				if (valid) {
 					const article = _.pick(articleObject,
-						['title', 'content', 'abstract', 'thumbnail']);
+						['title', 'content', 'abstract', 'thumbnail', 'category']);
 
-						console.log(article);
 
 					axios.put(`/api/tju/service/article/${articleObject.id}`, article).then(res => {
-
-						if (isChange) {
-							const articleId = res.data.data.id;
-
-							this.deleteCatagory(articleId).then(() => {
-
-								axios.post(`/api/tju/service/article/${articleId}/catagory/${articleObject.catagory}`)
-									.then(() => {
-										this.$notify({
-											title: 'Success',
-											message: 'You have update a article',
-											type: 'success',
-											duration: 2000,
-											position: 'top-left'
-										});
-									});
-
-							}).catch(err => {
-								this.$notify.error({
-									title: 'Fail',
-									message: 'The change of catagory failed',
-									duration: 2000,
-									position: 'top-left',
-									offset: 100
-								});
-							});
-						}
-
-					}).then(() => {
 						this.$notify({
 							title: 'Success',
 							message: 'You have update a article',
@@ -88,14 +58,6 @@ export default {
 				} else {
 					return false;
 				}
-			});
-		},
-		deleteCatagory(id) {
-
-			return axios.get(`/api/tju/service/article/${id}`).then(res => {
-				const article = res.data.data;
-
-				axios.delete(`/api/tju/service/article/${article.id}/catagory/${article.catagory}`);
 			});
 		}
 	}

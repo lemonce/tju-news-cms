@@ -15,18 +15,18 @@
 					<el-input placeholder="Please input title"
 						v-model="articleContent.title"
 						class="input-with-select">
-						<el-select v-model="articleContent.catagory"
+						<el-select v-model="articleContent.category"
 							style="width: 180px"
-							slot="prepend" placeholder="Catagory"
+							slot="prepend" placeholder="Category"
 							@change="isChange = true">
-							<el-option v-for="item in catagorys"
+							<el-option v-for="item in categoryList"
 								:key="item.name"
 								:label="item.name"
 								:value="item.id"></el-option>
 						</el-select>
 					</el-input>
 				</el-form-item>
-				<el-form-item label="abstract" prop="abstract">
+				<el-form-item label="abstract">
 					<el-input type="textarea" resize="none" rows="4" v-model="articleContent.abstract"></el-input>
 				</el-form-item>
 				<el-form-item>
@@ -37,29 +37,6 @@
 						:isChange="isChange"
 						></slot>
 				</el-form-item>
-				<!-- <el-form-item label="thumbnail" prop="thumbnail">
-					<el-input type="textarea" v-model="articleContent.thumbnail"></el-input>
-				</el-form-item> -->
-				
-				<!-- <div :class="{'document-editor':!isFullScreen,'FullScreen': isFullScreen}">
-					<div ref="toolbar" class="document-editor__toolbar"></div>
-					<div class="document-editor__editable-container">
-						<button class="danger" @click.prevent="isFullScreen = true" v-if="!isFullScreen">
-							<i class="fa fa-arrows-alt"></i>
-							</button>
-						<button class="danger" @click.prevent="isFullScreen = false" v-if="isFullScreen">
-							<i class="fa fa-compress"></i>
-						</button>
-						<div ref="editor" class="document-editor__editable">
-							<div class="ck-content">
-								<h2>Insert your article title here</h2>
-								<h3>Insert the article content here</h3>
-								<h4>You can use the tool-bar to make it comfortable</h4>
-							</div>
-						</div>
-					</div>
-				</div> -->
-
 				<div :class="{'document-editor':!isFullScreen,'FullScreen': isFullScreen}">
 					<div ref="toolbar" class="document-editor__toolbar"></div>
 					<div class="document-editor__editable-container">
@@ -87,33 +64,10 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-
-import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
-import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
-import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
-
 import GFMDataProcessor from '@ckeditor/ckeditor5-markdown-gfm/src/gfmdataprocessor';
 
-class UploadAdapter {
-	constructor(loader) {
-		this.loader = loader;
-	}
+import UploadAdapter from '../../adapter';
 
-	upload() {
-		return new Promise((resolve, reject) => {
-
-			resolve({
-				default: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524653398324&di=f665dc12e3f0d5442c2c0dd850977244&imgtype=0&src=http%3A%2F%2Fimg15.3lian.com%2F2015%2Ff2%2F49%2Fd%2F115.jpg'
-			});
-
-			this.reject = reject;
-		});
-	}
-
-	abort() {
-		this.reject();
-	}
-}
 export default {
 	name: 'editor',
 	props: ['id'],
@@ -124,9 +78,9 @@ export default {
 				content: '',
 				abstract: '',
 				thumbnail: '',
-				catagory: ''
+				category: null
 			},
-			catagorys: [],
+			categoryList: [],
 			formRules: {
 				title: [
 					{
@@ -136,12 +90,6 @@ export default {
 					{
 						min: 2,
 						message: 'Length is at least 2',
-					}
-				],
-				abstract: [
-					{
-						required: true,
-						message: 'Please input Article abstract',
 					}
 				],
 				thumbnail: [
@@ -160,12 +108,12 @@ export default {
 
 		this.createEditor().then(() => {
 			
-			axios.get('/api/tju/service/catagory', {
+			axios.get('/api/tju/service/category', {
 				params: {
 					active: true
 				}
 			}).then(res => {
-				this.catagorys = res.data.data;
+				this.categoryList = res.data.data;
 			});
 
 		}).then(() => {
@@ -210,7 +158,9 @@ export default {
 			
 				editor.model.document.on('change', () => {
 					this.articleContent.content = editor.getData();
+					console.log(editor.getData());
 				});
+
 
 			}).catch( error => {
 				console.error( error );
@@ -226,7 +176,7 @@ export default {
     border: 1px solid var(--ck-color-base-border);
     border-radius: var(--ck-border-radius);
 	max-height: 700px;
-	width: 1358px;
+	width: auto;
     display: flex;
     flex-flow: column nowrap;
 	overflow: hidden;
@@ -262,8 +212,8 @@ export default {
 
 .document-editor__editable-container .ck-editor__editable {
     /* Set the dimensions of the "page". */
-    width: 758px;
-    min-height: 1258px;
+    width: 1140px;
+	min-height: 700px;
 	
 
     /* Keep the "page" off the boundaries of the container. */
@@ -275,5 +225,8 @@ export default {
     background: white;
     box-shadow: 0 0 5px hsla( 0,0%,0%,.1 );
     margin: 0 auto;
+}
+.document-editor__editable-container figcaption.ck-editor__editable {
+	width: auto;
 }
 </style>

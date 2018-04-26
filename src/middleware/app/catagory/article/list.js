@@ -2,25 +2,21 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* getArticleListOfCatagory(req, res, next) {
-	const Classification = res.sequelize.model('tjuClassification');
+module.exports = function* getArticleListOfCategory(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
-	const catagory = res.data();
-	
-	const classificationList = yield Classification.findAll({
+	const category = res.data();
+
+	const articleList = yield Article.findAll({
 		where: {
-			catagoryId: catagory.id
-		},
-		include: [{
-			model: Article,
-		}]
+			category: category.id
+		}
 	});
 
-	if (classificationList.length === 0) {
+	if (articleList.length === 0) {
 		throwError('The article is not existed', 404);
 	}
 
-	res.data(classificationList);
+	res.data(articleList);
 
 	next();
 };

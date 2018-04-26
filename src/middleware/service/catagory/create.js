@@ -2,24 +2,24 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* createCatagory(req, res, next) {
-	const Catagory = res.sequelize.model('tjuCatagory');
+module.exports = function* createCategory(req, res, next) {
+	const Category = res.sequelize.model('tjuCategory');
 	const {name} = req.body;
 
 
-	const catagoryExisted = yield Catagory.findAll({
+	const categoryExisted = yield Category.findAll({
 		where: {
 			name
 		}
 	});
 
-	if (catagoryExisted.length !== 0) {
-		throwError('The catagory has existed.', 403);
+	if (categoryExisted.length !== 0) {
+		throwError('The category has existed.', 403);
 	}
 
-	const catagory = yield Catagory.create(req.body);
+	const category = yield Category.create(req.body);
 
-	res.data(catagory);
+	res.data(category);
 
 	next();
 };

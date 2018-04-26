@@ -16,13 +16,22 @@ const Article = sequelize.define('tjuArticle', {
 		type: Sequelize.TEXT
 	},
 	thumbnail: {
-		type: Sequelize.STRING
+		type: Sequelize.TEXT
+	},
+	category: {
+		type: Sequelize.INTEGER
 	}
 }, {
 	paranoid: true
 });
 
-const Catagory = sequelize.define('tjuCatagory', {
+const ArticleAlias = sequelize.define('tjuAlias', {
+	alias: {
+		type: Sequelize.CHAR(16)
+	}
+});
+
+const Category = sequelize.define('tjuCategory', {
 	name: {
 		type: Sequelize.STRING
 	},
@@ -32,6 +41,4 @@ const Catagory = sequelize.define('tjuCatagory', {
 	}
 });
 
-const Classification = sequelize.define('tjuClassification');
-
-module.exports = { Article, Catagory, Classification };
+module.exports = { Article, Category, ArticleAlias};

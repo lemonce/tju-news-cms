@@ -7,15 +7,15 @@
 		</el-header>
 		<el-main>
 			<el-form
-				ref="catagory"
-				:model="catagory"
+				ref="category"
+				:model="category"
 				:rules="formRules"
 				label-width="100px"
 				label-position="top"
 				height="40px"
-				@submit.native.prevent="createCatagory('catagory')">
+				@submit.native.prevent="createCategory('category')">
 				<el-form-item prop="name">
-					<el-input placeholder="New Category" v-model="catagory.name">
+					<el-input placeholder="New Category" v-model="category.name">
 						<el-button slot="append" native-type="submit">Create</el-button>
 					</el-input>
 				</el-form-item>
@@ -67,10 +67,10 @@ import axios from 'axios';
 import dateFormat from 'dateformat';
 
 export default {
-	name: 'catagoryList',
+	name: 'categoryList',
 	data() {
 		return {
-			catagory: {
+			category: {
 				name: '',
 				active: true
 			},
@@ -78,7 +78,7 @@ export default {
 				name: [
 					{
 						required: true,
-						message: 'Please input Catagory name',
+						message: 'Please input Category name',
 					},
 					{
 						min: 2,
@@ -105,7 +105,7 @@ export default {
 			this.multipleSelection = val;
 		},
 		updateData() {
-			return axios.get('/api/tju/service/catagory').then(res => {
+			return axios.get('/api/tju/service/category').then(res => {
 				const data = res.data.data;
 
 				data.forEach(element => {
@@ -118,14 +118,14 @@ export default {
 			});
 		},
 		updateCategory(row) {
-			return axios.put(`/api/tju/service/catagory/${row.id}`, {
+			return axios.put(`/api/tju/service/category/${row.id}`, {
 					active: row.active
 				}).then(res => {
 					this.updateData();
 				}).catch(err => {
 					this.$notify.error({
 						title: 'Fail',
-						message: 'The change catagory is failed',
+						message: 'The change category is failed',
 						duration: 2000,
 						position: 'top-left',
 						offset: 100
@@ -135,16 +135,16 @@ export default {
 		resetForm(formName) {
         	this.$refs[formName].resetFields();
 		},
-		createCatagory(formName) {
+		createCategory(formName) {
 			this.$refs[formName].validate((valid) => {
 				if (valid) {
-					axios.post('/api/tju/service/catagory', this.catagory).then(res => {
+					axios.post('/api/tju/service/category', this.category).then(res => {
 						this.resetForm(formName);
 						this.updateData();
 						
 						this.$notify({
 							title: 'Success',
-							message: 'You have created a catagory',
+							message: 'You have created a category',
 							type: 'success',
 							duration: 2000,
 							position: 'top-left'

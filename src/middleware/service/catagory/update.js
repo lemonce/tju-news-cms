@@ -2,16 +2,16 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* updateCatagory(req, res, next) {
-	const catagory = res.data();
+module.exports = function* updateCategory(req, res, next) {
+	const category = res.data();
 
-	// if (!catagory.active) {
+	// if (!category.active) {
 	// 	throwError('The catagroy has disabled.', 403);
 	// }
 
-	const newCatagory = yield catagory.update(req.body);
+	const newCategory = yield category.update(req.body);
 
-	res.data(newCatagory);
+	res.data(newCategory);
 
 	next();
 };

@@ -9,7 +9,7 @@ import AdminstratorList from './component/administrator/list.vue';
 import CreateArticle from './component/article/create.vue';
 import UpdateArticle from './component/article/update.vue';
 import ArticleList from './component/article/list.vue';
-import CatagoryList from './component/catagory/list.vue';
+import CategoryList from './component/category/list.vue';
 
 import en_US from './i18n/en_US.yaml';
 import zh_CN from './i18n/zh_CN.yaml';
@@ -36,21 +36,10 @@ app.menu.addGroup('tju.article', [
 		path: '/tju/article/publish'
 	},
 	{
-		label: 'catagory.all',
-		path: '/tju/catagory/all'
+		label: 'category.all',
+		path: '/tju/category/all'
 	}
 ]);
-
-// app.menu.addGroup('tju.catagory', [
-// 	{
-// 		label: 'catagory.all',
-// 		path: '/tju/catagory/all'
-// 	},
-// 	{
-// 		label: 'catagory.create',
-// 		path: '/tju/catagory/publish'
-// 	}
-// ]);
 
 app.router.addRoutes([
 	{
@@ -94,7 +83,7 @@ app.router.addRoutes([
 
 app.router.addRoutes([
 	{
-		path: '/tju/catagory',
+		path: '/tju/category',
 		component: Home,
 		meta: {
 			requireAccount: true
@@ -102,7 +91,7 @@ app.router.addRoutes([
 		children: [
 			{
 				path: 'all',
-				component: CatagoryList
+				component: CategoryList
 			}
 		]
 	}

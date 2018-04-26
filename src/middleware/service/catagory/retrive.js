@@ -2,20 +2,20 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function* getCatagory(req, res, next) {
-	const Catagory = res.sequelize.model('tjuCatagory');
+module.exports = function* getCategory(req, res, next) {
+	const Category = res.sequelize.model('tjuCategory');
 
-	const catagory = yield Catagory.findOne({
+	const category = yield Category.findOne({
 		where: {
-			id: req.params.catagoryId
+			id: req.params.categoryId
 		}
 	});
 
-	if (!catagory) {
-		throwError('The catagory is not existed.', 404);
+	if (!category) {
+		throwError('The category is not existed.', 404);
 	}
 
-	res.data(catagory);
+	res.data(category);
 
 	next();
 };

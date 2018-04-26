@@ -8,9 +8,9 @@ const {
 	getArticleListPublished,
 	getArticlePublished,
 	getArticleContent,
-	getArticleListOfCatagory,
-	getCatagoryListUsable,
-	getCatagory
+	getArticleListOfCategory,
+	getCategoryListUsable,
+	getCategory
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
@@ -28,12 +28,12 @@ router.get('/article/:articleId', getArticlePublished);
 
 router.get('/article/:articleId/content', getArticlePublished, getArticleContent);
 
-router.get('/catagory', $testQuery({
+router.get('/category', $testQuery({
 	properties: {
 		name: {
 			type: 'string'
 		}
 	}
-}), getCatagoryListUsable);
+}), getCategoryListUsable);
 
-router.get('/catagory/:catagoryId/article', getCatagory, getArticleListOfCatagory);
+router.get('/category/:categoryId/article', getCategory, getArticleListOfCategory);

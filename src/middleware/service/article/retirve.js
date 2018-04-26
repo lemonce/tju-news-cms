@@ -1,23 +1,12 @@
 'use strict';
 
-module.exports = function* getArticleForAuthor(req, res, next) {
+module.exports = function getArticleForAuthor(req, res, next) {
 	const article = res.data();
 	const _ = require('lodash');
-	const Classification = res.sequelize.model('tjuClassification');
-
-	const classification = yield Classification.findOne({
-		where: {
-			articleId: article.id
-		}
-	});
 
 	const mixedArticle = _.pick(article, [
-		'id', 'title', 'content', 'abstract', 'thumbnail', 'author'
+		'id', 'title', 'content', 'abstract', 'thumbnail', 'author', 'category'
 	]);
-
-	if (classification) {
-		mixedArticle.catagory = classification.catagoryId;
-	}
 
 	res.data(mixedArticle);
 
