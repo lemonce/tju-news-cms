@@ -2,7 +2,7 @@
 
 module.exports = function getArticleListByAlias(aliasParam, Article, Alias) {
 
-	if (typeof aliasParam !== 'string') {
+	if (typeof aliasParam.name !== 'string') {
 		throw new Error('The parameter should be a string.');
 	}
 
@@ -10,9 +10,8 @@ module.exports = function getArticleListByAlias(aliasParam, Article, Alias) {
 
 		Alias.findOne({
 			where: {
-				alias: aliasParam
-			},
-			attributes: ['id', 'title', 'abstract', 'thumbnail', 'created_at']
+				alias: aliasParam.name
+			}
 		}).then(alias => {
 			
 			if (alias) {
@@ -20,7 +19,8 @@ module.exports = function getArticleListByAlias(aliasParam, Article, Alias) {
 				Article.findOne({
 					where: {
 						id: alias.article
-					}
+					},
+					attributes: ['id', 'title', 'abstract', 'thumbnail', 'created_at']
 				}).then(article => {
 	
 					if (article) {

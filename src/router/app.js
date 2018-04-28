@@ -1,7 +1,8 @@
 'use strict';
 
 const {
-	$testQuery
+	$testQuery,
+	$testBody
 } = require('express-handler-loader')('all');
 
 const {
@@ -39,4 +40,57 @@ router.get('/category', $testQuery({
 
 router.get('/category/:categoryId/article', getCategory, getArticleListOfCategory);
 
-router.post('/article/collection', createCollection);
+router.post('/article/collection', $testBody({
+	patternProperties: {
+		'^.*$': {
+			type: 'array',
+			items: {
+				type: 'object',
+				properties: {
+					type: {
+						type: 'string'
+					},
+					parameter: {
+						type: 'object',
+						properties: {
+							name: {
+								type: 'string'
+							},
+							thumbnail: {
+								type: 'boolean'
+							},
+							exp: {
+								type: 'object',
+								properties: {
+									limit: {
+										type: 'number'
+									},
+									range: {
+										type: 'object',
+										properties: {
+											from: {
+												type: 'number'
+											},
+											to: {
+												type: 'string'
+											}
+										}
+									},
+									operation: {
+										type: 'string'
+									}
+								},
+								additionalProperties: false
+							}
+						},
+						required: ['name'],
+						additionalProperties: false
+					}
+				},
+				required: ['type', 'parameter'],
+				additionalProperties: false
+			}
+		}
+	},
+	additionalProperties: false
+}), createCollection);

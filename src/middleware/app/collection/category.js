@@ -54,7 +54,7 @@ function getArticleListByRange({from = 0, to}, list) {
 		to = list.length;
 	}
 
-	if (from > to) {
+	if (from > to || typeof from !== 'number' ||  typeof to !== 'number') {
 		throw new Error('The range is ignore.');
 	}
 
