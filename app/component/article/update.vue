@@ -4,7 +4,6 @@
 			<el-button type="primary"
 				@click="updateArticle(article.articleObject, article.form, article.isChange)"
 			>
-				
 				Update
 			</el-button>
 		</template>
@@ -34,7 +33,7 @@ export default {
 			form.validate((valid) => {
 				if (valid) {
 					const article = _.pick(articleObject,
-						['title', 'content', 'abstract', 'thumbnail', 'category']);
+						['title', 'content', 'abstract', 'category', 'alias']);
 
 
 					axios.put(`/api/tju/service/article/${articleObject.id}`, article).then(res => {

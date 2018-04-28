@@ -25,7 +25,7 @@ export default {
 				if (valid) {
 
 					const article = _.pick(articleObject,
-						['title', 'content', 'abstract', 'thumbnail', 'category']);
+						['title', 'content', 'abstract', 'category', 'alias']);
 
 					axios.post('/api/tju/service/article', article).then(res => {
 						this.resetForm(form);

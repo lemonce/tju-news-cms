@@ -10,7 +10,8 @@ const {
 	getArticleContent,
 	getArticleListOfCategory,
 	getCategoryListUsable,
-	getCategory
+	getCategory,
+	createCollection
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
@@ -37,3 +38,5 @@ router.get('/category', $testQuery({
 }), getCategoryListUsable);
 
 router.get('/category/:categoryId/article', getCategory, getArticleListOfCategory);
+
+router.post('/article/collection', createCollection);

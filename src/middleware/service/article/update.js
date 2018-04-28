@@ -1,7 +1,19 @@
 'use strict';
 
+const getAbstract = require('./utils/abstract');
+const getThumbnail = require('./utils/thumbnail');
+
 module.exports = function* updateArticle(req, res, next) {
 	const article = res.data();
+	const {abstract, content} = req.body;
+
+	if (abstract === '' && content) {
+		req.body.abstract = getAbstract(content);
+	}
+
+	if (content) {
+		req.body.thumbnail = getThumbnail(content);
+	}
 
 	const newArticle = yield article.update(req.body);
 

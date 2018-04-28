@@ -19,8 +19,7 @@
 				"8200"
 			],			
 			"env": {
-				"NODE_ENV": "development",
-				"DEBUG": "lemonitor:*,lemonitor-application:*,-lemonitor:dev"
+				"NODE_ENV": "development"
 			},
 			"cwd": "${workspaceFolder}",
 			"outputCapture": "std"

@@ -26,8 +26,12 @@
 						</el-select>
 					</el-input>
 				</el-form-item>
-				<el-form-item label="abstract">
+				<el-form-item label="abstract" >
 					<el-input type="textarea" resize="none" rows="4" v-model="articleContent.abstract"></el-input>
+				</el-form-item>
+				<el-form-item label="alias" prop="alias">
+					<el-input type="text" v-model="articleContent.alias"
+						placeholder="Input the article alias "></el-input>
 				</el-form-item>
 				<el-form-item>
 					<slot
@@ -77,7 +81,7 @@ export default {
 				title: '',
 				content: '',
 				abstract: '',
-				thumbnail: '',
+				alias: '',
 				category: null
 			},
 			categoryList: [],
@@ -92,10 +96,10 @@ export default {
 						message: 'Length is at least 2',
 					}
 				],
-				thumbnail: [
+				alias: [
 					{
-						required: true,
-						message: 'Please input Article thumbnail',
+						max: 16,
+						message: 'Length is less than 16',
 					}
 				]
 			},

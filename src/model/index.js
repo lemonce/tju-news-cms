@@ -14,9 +14,9 @@ Account.hasMany(Article, {
 });
 
 ArticleAlias.belongsTo(Article, {
-	foreignKey: 'articleId'
+	foreignKey: 'article'
 });
 
 Article.hasMany(ArticleAlias, {
-	foreignKey: 'articleId'
+	foreignKey: 'article'
 });

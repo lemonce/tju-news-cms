@@ -16,7 +16,6 @@ the api of tju
     title: string
     content: string
     abstract: string
-    thumbnail: string
 }
 ```
 

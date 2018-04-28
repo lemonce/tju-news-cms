@@ -5,13 +5,20 @@ const getThumbnail = require('./utils/thumbnail');
 
 module.exports = function* createArticle(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
-	const {abstract, alias} = req.body;
+	const {abstract, content, title, category} = req.body;
 
-	if (req.body.abstract === '') {
-
+	if (abstract === '') {
+		req.body.abstract = getAbstract(content);
 	}
 
-	const construction = Object.assign({}, req.body, { author: req.session.accountId });
+	const thumbnail = getThumbnail(content);
+
+	const construction = Object.assign({}, {
+		abstract: req.body.abstract,
+		content,
+		title,
+		category
+	}, { author: req.session.accountId }, {thumbnail});
 
 	const article = yield Article.create(construction);
 
