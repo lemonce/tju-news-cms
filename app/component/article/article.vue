@@ -162,7 +162,6 @@ export default {
 			
 				editor.model.document.on('change', () => {
 					this.articleContent.content = editor.getData();
-					console.log(editor.getData());
 				});
 
 

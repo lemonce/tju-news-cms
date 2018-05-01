@@ -1,5 +1,7 @@
 'use strict';
 
+const fileUpload = require('express-fileupload');
+
 const {
 	$testQuery,
 	$testBody
@@ -23,7 +25,8 @@ const {
 	beforeCreateClassification,
 	uploadImage,
 	updateAlias,
-	createAlias
+	createAlias,
+	getImage
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
@@ -134,4 +137,8 @@ router.put('/category/:categoryId', $testBody({ //只能由可用改为不可用
 	required: ['active']
 }), getCategory, updateCategory);
 
+router.use(fileUpload());
+
 router.post('/image', uploadImage);
+
+router.get('/image/:hash/regular/:regularName', getImage);

@@ -4,17 +4,23 @@ import axios from 'axios';
 
 const {CancelToken} = axios;
 
+const axiosInstance = axios.create({
+	cancelToken: CancelToken.source().token,
+	headers: {
+		'Content-Type': 'multipart/form-data'
+	}
+});
+
 export default class UploadAdapter {
 	constructor(loader) {
 		this.loader = loader;
-		this.source = CancelToken.source();
 	}
 
 	upload() {
-		// console.log(this);
-		return axios.post('/api/tju/service/image', {}, {
-			cancelToken: this.source.token
-		}).then(res => {
+		const formData = new FormData();
+		formData.append('content', this.loader.file);
+
+		return axiosInstance.post('/api/tju/service/image', formData).then(res => {
 			return res.data.data;
 		});
 	}
