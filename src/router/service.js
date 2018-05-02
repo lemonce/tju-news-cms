@@ -140,5 +140,3 @@ router.put('/category/:categoryId', $testBody({ //只能由可用改为不可用
 router.use(fileUpload());
 
 router.post('/image', uploadImage);
-
-router.get('/image/:hash/regular/:regularName', getImage);

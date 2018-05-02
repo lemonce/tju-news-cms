@@ -2,18 +2,19 @@
 
 const {throwError} = require('error-standardize');
 
-module.exports = function getImage(req, res, next) {
+module.exports = function* getImage(req, res, next) {
 	const {hash, regularName} = req.params;
-	const imageRepository = require('./repository');
+	const {imageRepository} = require('./repository');
 
 	res.set('Content-Type', 'image/png');
 
-	imageRepository.read(hash, {
+	const {data} = yield imageRepository.read(hash, {
 		regularName
-	}).then(({data}) => {
-		res.send(data);
-	}).catch(err => {
-		throwError('The image get is error.', 500);
 	});
+	
+	if (!data) {
+		throwError('The image is not existed.', 404);
+	}
 
+	res.end(data);
 };

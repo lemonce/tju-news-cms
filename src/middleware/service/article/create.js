@@ -11,7 +11,7 @@ module.exports = function* createArticle(req, res, next) {
 		req.body.abstract = getAbstract(content);
 	}
 
-	const thumbnail = getThumbnail(content);
+	const thumbnail = yield getThumbnail(content);
 
 	const construction = Object.assign({}, {
 		abstract: req.body.abstract,
