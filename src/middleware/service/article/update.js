@@ -12,7 +12,7 @@ module.exports = function* updateArticle(req, res, next) {
 	}
 
 	if (content) {
-		req.body.thumbnail = getThumbnail(content);
+		req.body.thumbnail = yield getThumbnail(content);
 	}
 
 	const newArticle = yield article.update(req.body);

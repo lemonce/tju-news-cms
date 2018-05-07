@@ -9,7 +9,7 @@ module.exports = function uploadImage(req, res, next) {
 	const hash = entry.meta.hash;
 
 	res.data({
-		default: `http://localhost:80/api/tju/image/${hash}/regular/common`
+		default: `/api/tju/image/${hash}/regular/common`
 	});
 	
 	next();

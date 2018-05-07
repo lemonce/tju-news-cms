@@ -50,7 +50,7 @@ router.post('/article/collection', $testBody({
 					type: {
 						type: 'string'
 					},
-					parameter: {
+					args: {
 						type: 'object',
 						properties: {
 							name: {
@@ -87,7 +87,7 @@ router.post('/article/collection', $testBody({
 						additionalProperties: false
 					}
 				},
-				required: ['type', 'parameter'],
+				required: ['type', 'args'],
 				additionalProperties: false
 			}
 		}

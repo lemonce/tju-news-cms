@@ -25,8 +25,7 @@ const {
 	beforeCreateClassification,
 	uploadImage,
 	updateAlias,
-	createAlias,
-	getImage
+	createAlias
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();

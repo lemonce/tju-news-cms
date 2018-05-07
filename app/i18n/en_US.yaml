@@ -8,7 +8,7 @@ administrator:
 
 article:
   all: 'All Article'
-  create: 'new Article'
+  create: 'New Article'
 
 category:
   all: 'Category'
