@@ -1,6 +1,5 @@
 'use strict';
 
-const {throwError} = require('error-standardize');
 const Sequelize = require('sequelize');
 
 module.exports = function* getArticleList(req, res, next) {
@@ -19,10 +18,6 @@ module.exports = function* getArticleList(req, res, next) {
 	keyword ? (query.where.title = {[Sequelize.Op.like]: `%${keyword}%`}) : undefined;
 
 	const articleList = yield Article.findAll(query);
-
-	if (articleList.length === 0) {
-		throwError('The article is not existed', 404);
-	}
 
 	res.data(articleList);
 
