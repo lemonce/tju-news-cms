@@ -5,3 +5,7 @@ database:
     username: root
     password: '123456'
     database: tju
+server:
+  protocol:
+    http:
+      port: 8080

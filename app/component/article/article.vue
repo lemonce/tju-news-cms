@@ -52,7 +52,6 @@
 						</button>
 						<div ref="editor" class="document-editor__editable">
 							<div class="ck-content">
-								<h2>Insert your article title here</h2>
 								<h3>Insert the article content here</h3>
 							</div>
 						</div>
