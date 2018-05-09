@@ -32,6 +32,10 @@ module.exports = function* getThumbnail(content) {
 			responseType: 'arraybuffer'
 		});
 
+		if (!imageBuffer) {
+			return null;
+		}
+
 		const hash = yield pushThumbnail(imageBuffer.data);
 
 		return hash;

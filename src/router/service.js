@@ -88,7 +88,7 @@ router.put('/article/:articleId', $testBody({
 			type: ['number', 'null']
 		},
 		alias: {
-			type: 'string'
+			type: ['string', 'null']
 		}
 	},
 	additionalProperties: false
