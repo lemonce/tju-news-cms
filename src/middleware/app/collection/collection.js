@@ -27,9 +27,11 @@ module.exports = function* createCollection(req, res, next) {
 				if (aliasList.length === 0) {
 					// throwError('The article of this alias is not existed.', 404);
 					result.push({});
+				} else {
+
+					result.push(aliasList);
 				}
 				
-				result.push(aliasList);
 			}
 
 			if (type === 'category') {
@@ -38,9 +40,11 @@ module.exports = function* createCollection(req, res, next) {
 				if (categoryList.length === 0) {
 					// throwError('The articleList of category is not existed.', 404);
 					result.push({});
+				} else {
+
+					result.push(...categoryList);
 				}
 
-				result.push(...categoryList);
 			}
 		}
 
