@@ -25,9 +25,10 @@ module.exports = function* createCollection(req, res, next) {
 				const aliasList =  yield getArticleListByAlias(args[keys][i].args, Article, Alias);
 
 				if (aliasList.length === 0) {
-					throwError('The article of this alias is not existed.', 404);
+					// throwError('The article of this alias is not existed.', 404);
+					result.push({});
 				}
-
+				
 				result.push(aliasList);
 			}
 
@@ -35,7 +36,8 @@ module.exports = function* createCollection(req, res, next) {
 				const categoryList = yield getArticleListByCategory(args[keys][i].args, Article, Category);
 
 				if (categoryList.length === 0) {
-					throwError('The articleList of category is not existed.', 404);
+					// throwError('The articleList of category is not existed.', 404);
+					result.push({});
 				}
 
 				result.push(...categoryList);
