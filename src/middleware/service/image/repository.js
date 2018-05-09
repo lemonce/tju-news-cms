@@ -37,7 +37,7 @@ const huge = {
 	chain: [
 		{
 			type: 'resize',
-			args: [720, 720]
+			args: [1280, 720]
 		},
 		{
 			type: 'max',
