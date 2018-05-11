@@ -214,9 +214,6 @@ export default {
 
 .document-editor__editable-container .ck-editor__editable {
     /* Set the dimensions of the "page". */
-    width: 1140px;
-	min-height: 700px;
-	
 
     /* Keep the "page" off the boundaries of the container. */
     /* padding: 1cm 2cm 2cm; */
