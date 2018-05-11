@@ -4,6 +4,7 @@
 			<h1>
 				Category list
 			</h1>
+			<hr>
 		</el-header>
 		<el-main>
 			<el-form

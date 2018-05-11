@@ -33,7 +33,7 @@ module.exports = function* updateAlias(req, res, next) {
 
 	}
 
-	if (!articleAlias && alias !== null) {
+	if (!articleAlias && alias !== null && alias !== '') {
 		yield Alias.create({
 			alias,
 			article: article.id

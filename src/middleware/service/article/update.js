@@ -7,7 +7,7 @@ module.exports = function* updateArticle(req, res, next) {
 	const article = res.data();
 	const {abstract, content} = req.body;
 
-	if (abstract === '' && content) {
+	if (!abstract || abstract === '' && content) {
 		req.body.abstract = getAbstract(content);
 	}
 

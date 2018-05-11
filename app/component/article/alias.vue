@@ -4,7 +4,7 @@
 			<h1>
 				article list
 			</h1>
-			<hr>
+            <hr>
 		</el-header>
 		<el-main>
 			<data-tables
@@ -12,7 +12,6 @@
 				border
 				:search-def="searchDef"
 				:pagination-def="paginationDef"
-				:actions-def="actionsDef"
 				ref="multipleTable"
 				@selection-change="handleSelectionChange"
 				:col-not-row-click="canNotClickList"
@@ -52,7 +51,7 @@ import axios from 'axios';
 import dateFormat from 'dateformat';
 
 export default {
-	name: 'articleList',
+	name: 'aliasArticleList',
 	data() {
 		return {
 			column: [
@@ -73,10 +72,9 @@ export default {
 					sortable: false,
 				},
 				{
-					prop: 'author',
-					label: 'Author',
+					prop: 'alias',
+					label: 'Alias',
 					sortable: false,
-					width: '250'
 				},
 				{
 					prop: 'created_at',
@@ -96,28 +94,7 @@ export default {
 				pageSizes: [5, 10, 20],
 			},
 			canNotClickList: ['abstract', 'author', 'created_at', 'editor'],
-			multipleSelection: [],
-			actionsDef: {
-				def: [{
-					name: 'delete',
-					handler: () => {
-						this.multipleSelection.forEach(row => {
-
-							return axios.delete(`/api/tju/service/article/${row.id}`).then(res => {
-								this.updateData();
-							}).catch(err => {
-								this.$notify.error({
-									title: 'Fail',
-									message: 'The delete of article is failed',
-									duration: 2000,
-									position: 'top-left',
-									offset: 100
-								});
-							});
-						})
-					}
-				}]
-			}
+			multipleSelection: []
 		}
 	},
 	mounted() {
@@ -141,10 +118,12 @@ export default {
 			// this.$router.push({ path: `/tju/article/${val.id}/detail`});
 		},
 		updateData() {
-			return axios.get('/api/tju/service/article').then(res => {
+			return axios.get('/api/tju/service/article?alias=true').then(res => {
 				const data = res.data.data;
 
 				data.forEach(element => {
+                    element.title = element.tjuArticle.title;
+                    element.abstract= element.tjuArticle.abstract;
 
 					element.created_at = dateFormat(element.created_at, 'yyyy/mm/dd  HH:MM');
 				});

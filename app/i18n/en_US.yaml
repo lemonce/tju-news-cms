@@ -9,6 +9,14 @@ administrator:
 article:
   all: 'All Article'
   create: 'New Article'
+  alias: 'Fixed Page'
 
 category:
   all: 'Category'
+
+user:
+  name: 'Name'
+  password: 'Password'
+  email: 'Email'
+  create: 'Create'
+  put: 'Put'

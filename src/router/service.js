@@ -25,7 +25,9 @@ const {
 	beforeCreateClassification,
 	uploadImage,
 	updateAlias,
-	createAlias
+	createAlias,
+	createAdmin,
+	updateAdmin
 } = require('express-handler-loader')('tju');
 
 const router = module.exports = require('express').Router();
@@ -38,6 +40,39 @@ router.get('/administrator', $testQuery({
 	},
 	additionalProperties: false
 }), getAdminiList);
+
+router.post('/administrator', $testBody({
+	properties: {
+		name: {
+			type: 'string',
+			minLength: 4,
+			maxLength: 128
+		},
+		password: {
+			type: 'string',
+			minLength: 6,
+			maxLength: 32
+		},
+		email: {
+			type: 'string',
+			format: 'email'
+		}
+	},
+	additionalProperties: false,
+	required: ['name', 'password', 'email']
+}), createAdmin);
+
+router.put('/administrator/:administratorId/password', $testBody({
+	properties: {
+		password: {
+			type: 'string',
+			minLength: 6,
+			maxLength: 32
+		}
+	},
+	additionalProperties: false,
+	required: ['password'],
+}), getAdmin, updateAdmin);
 
 router.delete('/administrator/:administratorId', getAdmin, deleteAdmin);
 
@@ -67,6 +102,10 @@ router.get('/article', $testQuery({
 	properties: {
 		keyword: {
 			type: 'string'
+		},
+		alias: {
+			type: 'string',
+			pattern: '^(true|false)$'
 		}
 	}
 }), getArticleList);

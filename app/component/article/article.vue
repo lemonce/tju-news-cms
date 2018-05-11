@@ -2,6 +2,7 @@
     <el-container>
 		<el-header>
 			<h1>Article</h1>
+			<hr>
 		</el-header>
 		<el-main>
 			<el-form
@@ -28,10 +29,6 @@
 				</el-form-item>
 				<el-form-item label="abstract" >
 					<el-input type="textarea" resize="none" rows="4" v-model="articleContent.abstract"></el-input>
-				</el-form-item>
-				<el-form-item label="alias" prop="alias">
-					<el-input type="text" v-model="articleContent.alias"
-						placeholder="Input the article alias "></el-input>
 				</el-form-item>
 				<el-form-item>
 					<slot
@@ -95,12 +92,12 @@ export default {
 						message: 'Length is at least 2',
 					}
 				],
-				alias: [
-					{
-						max: 16,
-						message: 'Length is less than 16',
-					}
-				]
+				// alias: [
+				// 	{
+				// 		max: 16,
+				// 		message: 'Length is less than 16',
+				// 	}
+				// ]
 			},
 			editor: {},
 			isFullScreen: false,

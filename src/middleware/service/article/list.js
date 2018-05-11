@@ -4,9 +4,12 @@ const Sequelize = require('sequelize');
 
 module.exports = function* getArticleList(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
+	const Alias = res.sequelize.model('tjuAlias');
 	const author = req.session.accountId;
 
-	const {keyword} = req.query;
+	const {keyword, alias} = req.query;
+
+	const state = alias === 'true' ? true : false;
 
 	const query = {
 		where: {
@@ -17,7 +20,17 @@ module.exports = function* getArticleList(req, res, next) {
 
 	keyword ? (query.where.title = {[Sequelize.Op.like]: `%${keyword}%`}) : undefined;
 
-	const articleList = yield Article.findAll(query);
+	let articleList;
+
+	if (state) {
+		query.model = Article;
+
+		articleList = yield Alias.findAll({
+			include: [query]
+		});
+	} else {
+		articleList = yield Article.findAll(query);
+	}
 
 	res.data(articleList);
 

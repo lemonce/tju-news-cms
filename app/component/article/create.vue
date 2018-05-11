@@ -22,7 +22,7 @@ export default {
 		createArticle(articleObject, form, editor) {
 
 			form.validate((valid) => {
-				if (valid) {
+				if (valid && articleObject.category !== null) {
 
 					const article = _.pick(articleObject,
 						['title', 'content', 'abstract', 'category', 'alias']);
@@ -48,17 +48,22 @@ export default {
 							position: 'top-left',
 							offset: 100
 						});
+
 					});
 
 				} else {
-				
-					this.$notify.error({
-						title: 'Fail',
-						message: 'The Form is not complete',
-						duration: 2000,
-						position: 'top-left',
-						offset: 100
-					});
+
+					if (!valid) {
+						this.$message({
+							type: 'warning',
+							message: 'Please fill the form'
+						});
+					} else {
+						this.$message({
+							type: 'warning',
+							message: 'Please choose a category'
+						});
+					}
 
 					return false;
 				}
