@@ -2,7 +2,7 @@
 	<el-container>
 		<el-header>
 			<h1>
-				article list
+				{{$t('article.list')}}
 			</h1>
 			<hr>
 		</el-header>
@@ -30,7 +30,7 @@
 					:sortable="element.sortable">
 				</el-table-column>
 				<el-table-column
-					label="Editor"
+					:label="$t('editor')"
 					prop="editor"
 					align="center"
 					width='150'>
@@ -58,29 +58,24 @@ export default {
 			column: [
 				{
 					prop: 'id',
-					label: 'Id',
+					label: this.$t('id'),
 					sortable: false,
 					width: "150"
 				},
 				{
 					prop: 'title',
-					label: 'Title',
-					sortable: false,
-				},
-				{
-					prop: 'abstract',
-					label: 'Abstract',
+					label: this.$t('article.title'),
 					sortable: false,
 				},
 				{
 					prop: 'author',
-					label: 'Author',
+					label: this.$t('article.author'),
 					sortable: false,
 					width: '250'
 				},
 				{
 					prop: 'created_at',
-					label: 'CreatedAt',
+					label: this.$t('article.createdAt'),
 					sortable: true,
 					width: '250'
 				}

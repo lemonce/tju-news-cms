@@ -8,7 +8,7 @@ module.exports = function getArticleListByCategory(categoryParam, Article, Categ
 		throw new Error('The parameter should be an object.');
 	}
 
-	const {thumbnail, exp} = categoryParam;
+	const {thumbnail = true, exp} = categoryParam;
 	let limit;
 
 	if (exp) {
@@ -20,30 +20,18 @@ module.exports = function getArticleListByCategory(categoryParam, Article, Categ
 
 		limit = exp.limit;
 	}
-
-	return getArticleList(categoryParam.name, Article, Category, limit).then(articleList => {
+	
+	return getArticleList(categoryParam.name, Article, Category, limit, thumbnail).then(articleList => {
 		
-		let newArticleList;
-
-		if (thumbnail || thumbnail === undefined) {
-
-			newArticleList = articleList.filter(article => {
-				return article.thumbnail;
-			});
-
-		} else {
-			newArticleList = articleList;
-		}
-
 		if (exp) {
 			const {operation, range} = exp;
 
 			if (operationObj[operation] && range) {
-				newArticleList = operationObj[operation](range, newArticleList);
+				articleList = operationObj[operation](range, articleList);
 			}
 		}
 
-		return newArticleList;
+		return articleList;
 
 	});
 };
@@ -74,7 +62,9 @@ const operationObj = {
 	}
 };
 
-function getArticleList(categoryName, Article, Category, limit) {
+function getArticleList(categoryName, Article, Category, limit, thumbnail) {
+
+	const Sequelize = require('sequelize');
 
 	return new Promise((resolve) => {
 		Category.findOne({
@@ -94,6 +84,13 @@ function getArticleList(categoryName, Article, Category, limit) {
 				
 				if (limit) {
 					query.limit = limit + 1;
+				}
+
+				if (thumbnail) {
+					
+					query.where.thumbnail = {
+						[Sequelize.Op.ne]: null
+					};
 				}
 				
 				Article.findAll(query).then(articleList => {

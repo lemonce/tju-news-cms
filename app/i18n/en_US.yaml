@@ -1,22 +1,42 @@
-tju:
-  article: 'Article'
-  administrator: 'Administrator'
-  category: 'Category'
+home: home
 
-administrator:
-  all: 'All Administrator'
+id: id
 
-article:
-  all: 'All Article'
-  create: 'New Article'
-  alias: 'Fixed Page'
-
-category:
-  all: 'Category'
+editor: edit
+content: Please input content
 
 user:
-  name: 'Name'
-  password: 'Password'
-  email: 'Email'
-  create: 'Create'
-  put: 'Put'
+  name: Name
+  password: Password
+  email: Email
+  createdAt: CreatedAt
+  create: Create
+  reset: Reset
+  update: Update
+
+tju:
+  administrator: Administrator
+  article: Article
+
+administrator:
+  all: All Administrator
+  list: Administrator List
+  create: Create
+
+article:
+  retrive: Article
+  all: All Article
+  alias:
+    label: Alias
+    list: Alias Article List
+  create: Create
+  title: Title
+  abstract: Abstract
+  author: Author
+  createdAt: CreatedAt
+  category: Category
+  list: Article List
+
+message:
+  content: 'Please input title'
+  length: Length 2 at least

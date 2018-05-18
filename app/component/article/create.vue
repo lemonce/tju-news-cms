@@ -2,8 +2,8 @@
     <editor>
         <template slot-scope="article">
             <el-button type="primary"
-				@click="createArticle(article.articleObject, article.form, article.editor)">Create</el-button>
-            <el-button @click="resetForm(article.form)">Reset</el-button>
+				@click="createArticle(article.articleObject, article.form, article.editor)">{{$t('user.create')}}</el-button>
+            <el-button @click="resetForm(article.form)">{{$t('user.reset')}}</el-button>
         </template>
     </editor>
 </template>

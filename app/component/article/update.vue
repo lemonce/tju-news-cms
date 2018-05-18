@@ -4,7 +4,7 @@
 			<el-button type="primary"
 				@click="updateArticle(article.articleObject, article.form, article.isChange)"
 			>
-				Update
+				{{$t('user.update')}}
 			</el-button>
 		</template>
 	</editor>

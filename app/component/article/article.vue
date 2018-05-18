@@ -1,7 +1,7 @@
 <template>
     <el-container>
 		<el-header>
-			<h1>Article</h1>
+			<h1>{{$t('article.retrive')}}</h1>
 			<hr>
 		</el-header>
 		<el-main>
@@ -12,13 +12,13 @@
 				label-width="100px"
 				label-position="top"
 				width="80">
-				<el-form-item label="title" prop="title">
-					<el-input placeholder="Please input title"
+				<el-form-item :label="$t('article.title')" prop="title">
+					<el-input :placeholder="$t('message.content')"
 						v-model="articleContent.title"
 						class="input-with-select">
 						<el-select v-model="articleContent.category"
 							style="width: 180px"
-							slot="prepend" placeholder="Category"
+							slot="prepend" :placeholder="$t('article.category')"
 							@change="isChange = true">
 							<el-option v-for="item in categoryList"
 								:key="item.name"
@@ -27,7 +27,7 @@
 						</el-select>
 					</el-input>
 				</el-form-item>
-				<el-form-item label="abstract" >
+				<el-form-item :label="$t('article.abstract')" >
 					<el-input type="textarea" resize="none" rows="4" v-model="articleContent.abstract"></el-input>
 				</el-form-item>
 				<el-form-item>
@@ -49,7 +49,7 @@
 						</button>
 						<div ref="editor" class="document-editor__editable">
 							<div class="ck-content">
-								<h3>Insert the article content here</h3>
+								<h3>{{$t('content')}}</h3>
 							</div>
 						</div>
 					</div>
@@ -85,11 +85,11 @@ export default {
 				title: [
 					{
 						required: true,
-						message: 'Please input Article title',
+						message: this.$t('message.content'),
 					},
 					{
 						min: 2,
-						message: 'Length is at least 2',
+						message: this.$t('message.length'),
 					}
 				],
 				// alias: [

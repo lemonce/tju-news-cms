@@ -18,7 +18,7 @@ import zh_CN from './i18n/zh_CN.yaml';
 app.i18n.mergeLocaleMessage('en', en_US);
 app.i18n.mergeLocaleMessage('zh', zh_CN);
 
-app.i18n.locale = 'en';
+app.i18n.locale = 'zh';
 
 app.menu.addGroup('tju.administrator', [
 	{
@@ -33,7 +33,7 @@ app.menu.addGroup('tju.article', [
 		path: '/tju/article/all'
 	},
 	{
-		label: 'article.alias',
+		label: 'article.alias.list',
 		path: '/tju/article/alias'
 	},
 	{

@@ -1,4 +1,42 @@
 home: '主页'
+
+id: '序号'
+
+editor: '编辑'
+content: '在此处输入内容'
+
 user:
-  username: '用户名'
+  name: '用户名'
   password: '密码'
+  email: '邮箱'
+  createdAt: '创建时间'
+  create: '创建'
+  reset: '清空'
+  update: '更新'
+
+tju:
+  administrator: '管理员'
+  article: '文章'
+
+administrator:
+  all: '全部管理员'
+  list: '管理员列表'
+  create: '创建一个管理员'
+
+article:
+  retrive: '文章'
+  all: '全部文章'
+  alias:
+    label: '别名'
+    list: '别名文章列表'
+  create: '创建'
+  title: '标题'
+  abstract: '摘要'
+  author: '作家'
+  createdAt: '创建时间'
+  category: '类型'
+  list: '文章列表'
+
+message:
+  content: '请输入文章标题'
+  length: '长度至少为2'

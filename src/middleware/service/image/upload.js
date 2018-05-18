@@ -2,6 +2,9 @@
 
 module.exports = function uploadImage(req, res, next) {
 	const imageBuffer = req.files.content.data;
+	const {config} = require('lemonitor-service');
+	const domain = config.get('server.domain');
+	const port = config.get('server.protocol.http.port');
 
 	const {imageRepository} = require('./repository');
 
@@ -9,7 +12,7 @@ module.exports = function uploadImage(req, res, next) {
 	const hash = entry.meta.hash;
 
 	res.data({
-		default: `http://202.113.8.66:8080/api/tju/image/${hash}/regular/common`
+		default: `http://${domain}:${port}/api/tju/image/${hash}/regular/common`
 	});
 	
 	next();

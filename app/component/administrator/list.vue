@@ -2,7 +2,7 @@
 	<el-container>
 		<el-header>
 			<h1>
-				administrator list
+				{{$t('administrator.list')}}
 			</h1>
 			<hr>
 		</el-header>
@@ -18,7 +18,8 @@
 							:pagination-def="paginationDef"
 							:actions-def="actionsDef"
 							ref="multipleTable"
-							@selection-change="handleSelectionChange">
+							@selection-change="handleSelectionChange"
+							@row-click="editorRow">
 							<el-table-column
 								type="selection"
 								width="55"></el-table-column>
@@ -33,13 +34,12 @@
 								height="20px">
 							</el-table-column>
 							<el-table-column
-								label="Editor"
+								:label="$t('editor')"
 								prop="editor"
 								align="center"
 								width='150'>
 								<template slot-scope="scope">
 									<el-button
-										@click.native.prevent="editorRow(scope.row)"
 										type="text">
 										<i class="fa fa-pencil fa-fw" aria-hidden="true"></i>
 									</el-button>
@@ -52,7 +52,7 @@
 					<div class="grid-content bg-purple-light">
 						<el-card class="box-card" shadow="never">
 							<div slot="header" class="clearfix">
-								<span>Create an administrator</span>
+								<span>{{$t('administrator.create')}}</span>
 							</div>
 							<el-form :model="userForm"
 								:rules="userRule"
@@ -127,25 +127,25 @@ export default {
 			column: [
 				{
 					prop: 'id',
-					label: 'Id',
+					label: this.$t('id'),
 					sortable: true,
-					width: '70'
+					width: '100'
 				},
 				{
 					prop: 'name',
-					label: 'Name',
+					label: this.$t('user.name'),
 					sortable: false,
 					width: '100'
 				},
 				{
 					prop: 'email',
-					label: 'Email',
+					label: this.$t('user.email'),
 					sortable: false,
 					width: '300'
 				},
 				{
 					prop: 'created_at',
-					label: 'CreatedAt',
+					label: this.$t('user.createdAt'),
 					sortable: true,
 					width: '200'
 				}
@@ -261,7 +261,11 @@ export default {
 				}
 			});
 		},
-		editorRow(row) {
+		editorRow(row, event, column) {
+			if (column.property !== 'name' && column.property !== 'editor') {
+				return false;
+			}
+
 			this.$prompt('Please input your new password', 'Message', {
 				confirmButtonText: 'OK',
 				cancelButtonText: 'Cancel',
