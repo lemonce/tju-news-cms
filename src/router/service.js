@@ -24,8 +24,6 @@ const {
 	updateCategory,
 	beforeCreateClassification,
 	uploadImage,
-	updateAlias,
-	createAlias,
 	createAdmin,
 	updateAdmin
 } = require('express-handler-loader')('tju');
@@ -96,7 +94,7 @@ router.post('/article', $testBody({
 	},
 	additionalProperties: false,
 	required: ['title', 'content']
-}), beforeCreateClassification, createArticle, createAlias);
+}), beforeCreateClassification, createArticle);
 
 router.get('/article', $testQuery({
 	properties: {
@@ -131,7 +129,7 @@ router.put('/article/:articleId', $testBody({
 		}
 	},
 	additionalProperties: false
-}), getArticle, beforeCreateClassification, updateArticle, updateAlias);
+}), getArticle, beforeCreateClassification, updateArticle);
 
 router.get('/article/:articleId/content', getArticle, getArticleContentByService);
 
