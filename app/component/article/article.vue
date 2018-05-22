@@ -225,4 +225,7 @@ export default {
 .document-editor__editable-container figcaption.ck-editor__editable {
 	width: auto;
 }
+.ck-content .image>img{
+	min-width: 80%;
+}
 </style>
