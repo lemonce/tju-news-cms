@@ -31,7 +31,7 @@ const common = {
 	chain: [
 		{
 			type: 'resize',
-			args: [400, 300]
+			args: [800, 600]
 		},
 		{
 			type: 'max',

@@ -29,7 +29,17 @@ module.exports = function* getArticleList(req, res, next) {
 			include: [query]
 		});
 	} else {
-		articleList = yield Article.findAll(query);
+		query.include = [{
+			model: Alias
+		}];
+
+		const allArticle = yield Article.findAll(query);
+
+		articleList = allArticle.filter(article => {
+			const length = article.tjuAliases.length;
+			
+			return article.tjuAliases.length === 0;
+		});
 	}
 
 	res.data(articleList);
