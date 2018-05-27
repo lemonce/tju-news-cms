@@ -110,7 +110,7 @@ export default {
 			});
 		},
 		editorRow(row) {
-			const id = row.id;
+			const id = row.article;
 
 			this.$router.push({ path: `/tju/article/${id}/update`});
 		},

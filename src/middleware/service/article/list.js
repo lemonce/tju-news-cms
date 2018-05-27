@@ -36,8 +36,6 @@ module.exports = function* getArticleList(req, res, next) {
 		const allArticle = yield Article.findAll(query);
 
 		articleList = allArticle.filter(article => {
-			const length = article.tjuAliases.length;
-			
 			return article.tjuAliases.length === 0;
 		});
 	}
