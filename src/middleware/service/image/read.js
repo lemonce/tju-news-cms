@@ -8,9 +8,7 @@ module.exports = function* getImage(req, res, next) {
 
 	res.set('Content-Type', 'image/png');
 
-	const {data} = yield imageRepository.read(hash, {
-		regularName
-	});
+	const {data} = yield imageRepository.read(hash);
 	
 	if (!data) {
 		throwError('The image is not existed.', 404);

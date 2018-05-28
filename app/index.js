@@ -29,12 +29,12 @@ app.menu.addGroup('tju.administrator', [
 
 app.menu.addGroup('tju.article', [
 	{
-		label: 'article.all',
-		path: '/tju/article/all'
-	},
-	{
 		label: 'article.alias.list',
 		path: '/tju/article/alias'
+	},
+	{
+		label: 'article.all',
+		path: '/tju/article/all'
 	},
 	{
 		label: 'article.create',
