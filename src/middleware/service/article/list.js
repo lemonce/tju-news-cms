@@ -5,16 +5,13 @@ const Sequelize = require('sequelize');
 module.exports = function* getArticleList(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
 	const Alias = res.sequelize.model('tjuAlias');
-	const author = req.session.accountId;
+	// const author = req.session.accountId;
 
 	const {keyword, alias} = req.query;
 
 	const state = alias === 'true' ? true : false;
 
 	const query = {
-		where: {
-			author
-		},
 		order: [['created_at', 'desc']]
 	};
 

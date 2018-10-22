@@ -36,6 +36,7 @@ article:
   createdAt: '创建时间'
   category: '类型'
   list: '文章列表'
+  createtime: '创建时间'
 
 message:
   content: '请输入文章标题'

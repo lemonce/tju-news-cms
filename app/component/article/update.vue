@@ -34,7 +34,10 @@ export default {
 				if (valid) {
 					const article = _.pick(articleObject,
 						['title', 'content', 'abstract', 'category', 'alias']);
-
+					
+					if (articleObject.created_at) {
+						article.created_at = articleObject.created_at;
+					}
 
 					axios.put(`/api/tju/service/article/${articleObject.id}`, article).then(res => {
 						this.$notify({

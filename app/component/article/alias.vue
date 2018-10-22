@@ -125,7 +125,7 @@ export default {
                     element.title = element.tjuArticle.title;
                     element.abstract= element.tjuArticle.abstract;
 
-					element.created_at = dateFormat(element.created_at, 'yyyy/mm/dd  HH:MM');
+					element.created_at = dateFormat(element.tjuArticle.created_at, 'yyyy/mm/dd  HH:MM');
 				});
 
 				this.tableData = res.data.data;

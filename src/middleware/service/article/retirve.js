@@ -12,7 +12,7 @@ module.exports = function* getArticleForAuthor(req, res, next) {
 	});
 
 	const mixedArticle = _.pick(article, [
-		'id', 'title', 'content', 'abstract', 'thumbnail', 'author', 'category'
+		'id', 'title', 'content', 'abstract', 'thumbnail', 'author', 'category', 'created_at'
 	]);
 
 	if (articleAlias) {

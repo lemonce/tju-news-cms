@@ -4,7 +4,8 @@ const getAbstract = require('./utils/abstract');
 const getThumbnail = require('./utils/thumbnail');
 
 module.exports = function* updateArticle(req, res, next) {
-	const article = res.data();
+	// const article = res.data();
+	const Article = res.sequelize.model('tjuArticle');
 	const {abstract, content} = req.body;
 
 	if (!abstract || abstract === '' && content) {
@@ -15,7 +16,11 @@ module.exports = function* updateArticle(req, res, next) {
 		req.body.thumbnail = yield getThumbnail(content);
 	}
 
-	const newArticle = yield article.update(req.body);
+	const newArticle = yield Article.update(req.body, {
+		where: {
+			id: req.params.articleId
+		}
+	});
 
 	res.data(newArticle);
 	

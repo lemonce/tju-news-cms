@@ -27,6 +27,10 @@ export default {
 					const article = _.pick(articleObject,
 						['title', 'content', 'abstract', 'category', 'alias']);
 
+					if (articleObject.created_at) {
+						article.created_at = articleObject.created_at;
+					}
+
 					axios.post('/api/tju/service/article', article).then(res => {
 						this.resetForm(form);
 

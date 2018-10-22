@@ -5,7 +5,7 @@ const getThumbnail = require('./utils/thumbnail');
 
 module.exports = function* createArticle(req, res, next) {
 	const Article = res.sequelize.model('tjuArticle');
-	const {abstract, content, title, category} = req.body;
+	const {abstract, content, title, category, created_at} = req.body;
 
 	if (abstract === '') {
 		req.body.abstract = getAbstract(content);
@@ -17,7 +17,8 @@ module.exports = function* createArticle(req, res, next) {
 		abstract: req.body.abstract,
 		content,
 		title,
-		category
+		category,
+		created_at
 	}, { author: req.session.accountId }, {thumbnail});
 
 	const article = yield Article.create(construction);

@@ -90,6 +90,9 @@ router.post('/article', $testBody({
 		},
 		alias: {
 			type: 'string'
+		},
+		created_at: {
+			type: 'string'
 		}
 	},
 	additionalProperties: false,
@@ -126,6 +129,9 @@ router.put('/article/:articleId', $testBody({
 		},
 		alias: {
 			type: ['string', 'null']
+		},
+		created_at: {
+			type: 'string'
 		}
 	},
 	additionalProperties: false

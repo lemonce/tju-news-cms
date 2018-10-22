@@ -30,6 +30,15 @@
 				<el-form-item :label="$t('article.abstract')" >
 					<el-input type="textarea" resize="none" rows="4" v-model="articleContent.abstract"></el-input>
 				</el-form-item>
+				<el-form-item :label="$t('article.createtime')">
+					<el-date-picker
+						v-model="articleContent.created_at"
+						type="datetime"
+						placeholder="选择日期时间"
+						align="right"
+						:picker-options="pickerOptions">
+					</el-date-picker>
+				</el-form-item>
 				<el-form-item>
 					<slot
 						:articleObject="articleContent"
@@ -78,7 +87,8 @@ export default {
 				content: '',
 				abstract: '',
 				alias: '',
-				category: null
+				category: null,
+				created_at: ''
 			},
 			categoryList: [],
 			formRules: {
@@ -101,7 +111,29 @@ export default {
 			},
 			editor: {},
 			isFullScreen: false,
-			isChange: false
+			isChange: false,
+			pickerOptions: {
+				shortcuts: [{
+					text: '今天',
+					onClick(picker) {
+					picker.$emit('pick', new Date());
+					}
+				}, {
+					text: '昨天',
+					onClick(picker) {
+					const date = new Date();
+					date.setTime(date.getTime() - 3600 * 1000 * 24);
+					picker.$emit('pick', date);
+					}
+				}, {
+					text: '一周前',
+					onClick(picker) {
+					const date = new Date();
+					date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+					picker.$emit('pick', date);
+					}
+				}]
+			}
 		}
 	},
 	mounted() {
