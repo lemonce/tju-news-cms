@@ -83,7 +83,7 @@ function getArticleList(categoryName, Article, Category, limit, thumbnail) {
 				};
 				
 				if (limit) {
-					query.limit = limit + 1;
+					query.limit = limit;
 				}
 
 				if (thumbnail) {
