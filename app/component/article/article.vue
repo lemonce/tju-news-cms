@@ -174,11 +174,11 @@ export default {
 
 		createEditor() {
 			
-			function Markdown( editor ) {
-				editor.data.processor = new GFMDataProcessor();
-			}
+			// function Markdown( editor ) {
+			// 	editor.data.processor = new GFMDataProcessor();
+			// }
 
-			DecoupledEditor.build.plugins.push(Markdown);
+			// DecoupledEditor.build.plugins.push(Markdown);
 
 			return DecoupledEditor.create(this.$refs.editor).then(editor => {
 				this.editor = editor;

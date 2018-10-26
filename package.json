@@ -18,16 +18,17 @@
   },
   "homepage": "https://github.com/lemonce/tju-news-cms#readme",
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^1.0.0-beta.4",
-    "@ckeditor/ckeditor5-build-decoupled-document": "^1.0.0-beta.4",
-    "@ckeditor/ckeditor5-markdown-gfm": "^1.0.0-beta.4",
-    "express-fileupload": "^0.4.0",
-    "express-upload": "^0.1.0",
+    "@ckeditor/ckeditor5-build-classic": "1.0.0-beta.4",
+    "@ckeditor/ckeditor5-build-decoupled-document": "1.0.0-beta.4",
+    "@ckeditor/ckeditor5-markdown-gfm": "1.0.0-beta.4",
+    "express-fileupload": "0.4.0",
+    "express-upload": "0.1.0",
+    "jsdom": "12.2.0",
     "lemonitor-application": "git+https://github.com/lemonce/lemonitor-application.git#element-ui",
-    "markdown-it": "^8.4.1",
-    "node-gyp": "^3.6.2",
-    "sharp": "^0.20.2",
+    "markdown-it": "8.4.1",
+    "node-gyp": "3.6.2",
+    "sharp": "0.20.2",
     "sharp-repo": "git+https://github.com/lemonce/sharp-repo.git",
-    "vue-data-tables": "^3.2.0"
+    "vue-data-tables": "3.2.0"
   }
 }
