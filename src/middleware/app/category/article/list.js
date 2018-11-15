@@ -7,7 +7,8 @@ module.exports = function* getArticleListOfCategory(req, res, next) {
 	const articleList = yield Article.findAll({
 		where: {
 			category: category.id
-		}
+		},
+		order: [['created_at', 'desc']]
 	});
 
 	res.data(articleList);

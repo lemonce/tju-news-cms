@@ -79,7 +79,8 @@ function getArticleList(categoryName, Article, Category, limit, thumbnail) {
 					where: {
 						category: category.id
 					},
-					attributes: ['id', 'title', 'abstract', 'thumbnail', 'created_at']
+					attributes: ['id', 'title', 'abstract', 'thumbnail', 'created_at'],
+					order: [['created_at', 'desc']]
 				};
 				
 				if (limit) {
